@@ -24,11 +24,11 @@ MonoBehaviour:
   - title: "Vieux port et m\xE9dina de Bizerte"
     description: "Le vieux port, bord\xE9 de maisons aux couleurs vives, est l'un des plus anciens du bassin m\xE9diterran\xE9en. La m\xE9dina et le fort \xE9difi\xE9 au XVIe si\xE8cle gardent la m\xE9moire d'une cit\xE9 corsaire, et l'\xE9glise orthodoxe Saint-Alexandre-Nevski rappelle la communaut\xE9 russe install\xE9e ici en 1920."
     image: {fileID: 21300000, guid: bc4304bacd2d6f240bb822305a66c6ab, type: 3}
-    model: {fileID: 0}
+    model: {fileID: 523542686562817883, guid: f91f9933775c74aa78f110c3ef47cfd7, type: 3}
   - title: Ruines d'Utique
     description: "\xC0 une trentaine de kilom\xE8tres de Bizerte, Utique fut un comptoir ph\xE9nicien devenu cit\xE9 romaine prosp\xE8re. Son th\xE9\xE2tre, ses thermes et ses basiliques chr\xE9tiennes t\xE9moignent de si\xE8cles d'histoire punique, romaine et byzantine."
     image: {fileID: 21300000, guid: f4a0ad4637383674ba49797c41ad6188, type: 3}
-    model: {fileID: 0}
+    model: {fileID: 5714395799186228796, guid: 996de8ac759a147aa8a5fb47aa4efe08, type: 3}
   foods:
   - title: Makrouna abri de Bizerte
     description: "La makrouna abri (ou makrouna diari), p\xE2tes mijot\xE9es g\xE9n\xE9reuses de la ville du canal, est accompagn\xE9e du tlaytou, de la rechata hlow, de la boughaja et du knef, une p\xE2tisserie locale tr\xE8s appr\xE9ci\xE9e. La cuisine bizertine tire aussi parti de la p\xEAche du lac et de la mer."

@@ -52,6 +52,7 @@ namespace DiscoverTunisia.Tests
             {
                 Assert.That(m.Title, Is.Not.Empty);
                 Assert.That(m.Image, Is.Not.Null, m.Title + " has no photo");
+                Assert.That(m.Model, Is.Not.Null, m.Title + " has no 3D model");
             }
             foreach (var c in g.Foods.Concat(g.Clothes))
             {
