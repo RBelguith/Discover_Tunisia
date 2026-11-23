@@ -37,7 +37,7 @@ namespace DiscoverTunisia.Core
     {
         public const string Accueil = "01_Accueil";
         public const string Identification = "02_Identification";
-        public const string Globe = "03_Globe";
-        public const string AR = "04_AR";
+        public const string Globe = "04_Globe";
+        public const string AR = "05_AR";
     }
 }

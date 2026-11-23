@@ -1,0 +1,221 @@
+:root {
+    --c-bg: #08132D;
+    --c-panel: rgba(13, 28, 56, 0.92);
+    --c-panel-soft: rgba(30, 54, 96, 0.72);
+    --c-panel-hover: rgba(44, 76, 128, 0.85);
+    --c-line: rgba(130, 180, 240, 0.18);
+    --c-accent: #4FC3F7;
+    --c-accent-hover: #82D6FA;
+    --c-accent-ink: #05142A;
+    --c-gold: #FFC94D;
+    --c-text: #F0F7FF;
+    --c-text-2: #B3CCE6;
+    --c-text-3: #7D95B3;
+    --c-success: #33D173;
+    --c-veil: rgba(2, 6, 16, 0.82);
+    -unity-font-definition: url("project://database/Assets/DiscoverTunisia/UI/Fonts/Poppins-Regular-SDF.asset");
+    color: var(--c-text);
+    font-size: 26px;
+}
+
+.unity-ui-document__root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.screen {
+    flex-grow: 1;
+    opacity: 0;
+    transition-duration: 0.35s;
+    transition-timing-function: ease-out-cubic;
+}
+
+.screen--visible {
+    opacity: 1;
+}
+
+.hidden {
+    display: none;
+}
+
+.semibold {
+    -unity-font-definition: url("project://database/Assets/DiscoverTunisia/UI/Fonts/Poppins-SemiBold-SDF.asset");
+}
+
+.bold {
+    -unity-font-definition: url("project://database/Assets/DiscoverTunisia/UI/Fonts/Poppins-Bold-SDF.asset");
+}
+
+.eyebrow {
+    color: var(--c-accent);
+    font-size: 24px;
+    letter-spacing: 3px;
+    -unity-font-definition: url("project://database/Assets/DiscoverTunisia/UI/Fonts/Poppins-SemiBold-SDF.asset");
+}
+
+.muted {
+    color: var(--c-text-2);
+}
+
+.faint {
+    color: var(--c-text-3);
+    font-size: 22px;
+}
+
+.panel {
+    background-color: var(--c-panel);
+    border-radius: 32px;
+    border-width: 1px;
+    border-color: var(--c-line);
+    padding: 36px;
+}
+
+/* Buttons */
+
+.btn {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 84px;
+    padding: 0 36px;
+    margin: 0;
+    border-radius: 42px;
+    border-width: 0;
+    background-color: var(--c-panel-soft);
+    color: var(--c-text);
+    font-size: 28px;
+    -unity-font-definition: url("project://database/Assets/DiscoverTunisia/UI/Fonts/Poppins-SemiBold-SDF.asset");
+    transition-duration: 0.15s;
+}
+
+.btn:hover {
+    background-color: var(--c-panel-hover);
+}
+
+.btn:active {
+    scale: 0.97 0.97;
+}
+
+.btn:disabled {
+    opacity: 0.4;
+}
+
+.btn > .icon {
+    margin-right: 14px;
+}
+
+.btn > .icon--trailing {
+    margin-right: 0;
+    margin-left: 14px;
+}
+
+.btn--primary {
+    background-color: var(--c-accent);
+    color: var(--c-accent-ink);
+}
+
+.btn--primary:hover {
+    background-color: var(--c-accent-hover);
+}
+
+.btn--primary > .icon {
+    -unity-background-image-tint-color: var(--c-accent-ink);
+}
+
+.btn--large {
+    height: 104px;
+    padding: 0 48px;
+    border-radius: 52px;
+    font-size: 36px;
+}
+
+.icon-btn {
+    width: 84px;
+    height: 84px;
+    padding: 0;
+    border-width: 1px;
+    border-color: var(--c-line);
+    background-color: var(--c-panel);
+}
+
+.icon-btn > .icon {
+    margin: 0;
+}
+
+/* Top bar */
+
+.top-bar {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    top: 36px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-bar__title {
+    flex-grow: 1;
+    align-items: center;
+}
+
+.top-bar__spacer {
+    width: 84px;
+}
+
+.screen-title {
+    font-size: 48px;
+    -unity-font-definition: url("project://database/Assets/DiscoverTunisia/UI/Fonts/Poppins-Bold-SDF.asset");
+}
+
+/* Chips */
+
+.chip {
+    flex-direction: row;
+    align-items: center;
+    height: 64px;
+    padding: 0 26px 0 20px;
+    margin-right: 16px;
+    border-radius: 32px;
+    border-width: 1px;
+    border-color: var(--c-line);
+    background-color: var(--c-panel-soft);
+    font-size: 24px;
+}
+
+.chip > .icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 12px;
+    -unity-background-image-tint-color: var(--c-accent);
+}
+
+/* Icons */
+
+.icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    -unity-background-image-tint-color: var(--c-text);
+}
+
+.icon--back { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/back.svg"); }
+.icon--next { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/next.svg"); }
+.icon--home { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/home.svg"); }
+.icon--settings { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/settings.svg"); }
+.icon--info { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/info.svg"); }
+.icon--close { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/close.svg"); }
+.icon--scan { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/scan.svg"); }
+.icon--monuments { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/monuments.svg"); }
+.icon--food { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/food.svg"); }
+.icon--clothing { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/clothing.svg"); }
+.icon--ar { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/ar.svg"); }
+.icon--globe { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/globe.svg"); }
+.icon--pin { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/pin.svg"); }
+.icon--check { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/check.svg"); }
+.icon--refresh { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/refresh.svg"); }
+.icon--card { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/card.svg"); }
+.icon--search { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/search.svg"); }

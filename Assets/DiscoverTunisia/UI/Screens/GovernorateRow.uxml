@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Button name="row" class="gov-row">
+        <ui:VisualElement name="thumb" class="gov-row__thumb" picking-mode="Ignore" />
+        <ui:VisualElement class="gov-row__text" picking-mode="Ignore">
+            <ui:VisualElement class="gov-row__name-line" picking-mode="Ignore">
+                <ui:VisualElement name="dot" class="gov-row__dot" picking-mode="Ignore" />
+                <ui:Label name="name" class="gov-row__name" picking-mode="Ignore" />
+            </ui:VisualElement>
+            <ui:Label name="subtitle" class="gov-row__subtitle" picking-mode="Ignore" />
+        </ui:VisualElement>
+        <ui:VisualElement class="icon icon--next" picking-mode="Ignore" />
+    </ui:Button>
+</ui:UXML>

@@ -119,7 +119,7 @@ namespace DiscoverTunisia.EditorTools
             var earthTex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Resources/Images/earth.jpg");
             var earth = new GameObject("Earth");
             earth.transform.SetParent(spin.transform, false);
-            earth.AddComponent<MeshFilter>().sharedMesh = SaveMesh(Globe.SphereMesh.Build(GlobeRadius), "EarthSphere");
+            earth.AddComponent<MeshFilter>().sharedMesh = SaveMesh(SphereMeshBuilder.Build(GlobeRadius), "EarthSphere");
             earth.AddComponent<MeshRenderer>().sharedMaterial = Palette.Asset("M_Earth", Palette.LitShader, m =>
             {
                 m.SetColor("_BaseColor", Color.white);
@@ -129,14 +129,16 @@ namespace DiscoverTunisia.EditorTools
 
             var atmosphere = new GameObject("Atmosphere");
             atmosphere.transform.SetParent(root.transform, false);
-            atmosphere.AddComponent<MeshFilter>().sharedMesh = SaveMesh(Globe.SphereMesh.Build(GlobeRadius * 1.045f, 64, 32), "AtmosphereSphere");
+            atmosphere.AddComponent<MeshFilter>().sharedMesh = SaveMesh(SphereMeshBuilder.Build(GlobeRadius * 1.045f, 64, 32), "AtmosphereSphere");
             var atmoRenderer = atmosphere.AddComponent<MeshRenderer>();
             atmoRenderer.sharedMaterial = Palette.Asset("M_Atmosphere", Palette.UnlitShader,
                 m => Palette.Transparent(m, new Color(0.30f, 0.70f, 1.00f, 0.20f), null, CullMode.Front));
             NoShadows(atmoRenderer);
 
-            Ring(root.transform, "Ring1", 1.55f, new Color(0.45f, 0.85f, 1f, 0.55f), new Vector3(68f, 0f, 12f));
-            Ring(root.transform, "Ring2", 1.78f, new Color(0.30f, 0.65f, 1f, 0.35f), new Vector3(74f, 0f, -18f));
+            Ring(root.transform, "Ring1", 1.16f, new Color(0.45f, 0.85f, 1f, 0.45f), new Vector3(68f, 0f, 12f));
+            Ring(root.transform, "Ring2", 1.26f, new Color(0.30f, 0.65f, 1f, 0.28f), new Vector3(74f, 0f, -18f));
+            var marker = AssetDatabase.LoadAssetAtPath<MarkerView>(Prefabs + "/Marker.prefab");
+            root.AddComponent<GlobeController>().EditorSetup(spin.transform, marker, true);
             Save(root, Prefabs + "/Globe.prefab");
         }
 
@@ -148,7 +150,7 @@ namespace DiscoverTunisia.EditorTools
             var line = go.AddComponent<LineRenderer>();
             line.useWorldSpace = false;
             line.loop = true;
-            line.widthMultiplier = 0.035f;
+            line.widthMultiplier = 0.025f;
             line.numCapVertices = 4;
             line.shadowCastingMode = ShadowCastingMode.Off;
             const int count = 128;
