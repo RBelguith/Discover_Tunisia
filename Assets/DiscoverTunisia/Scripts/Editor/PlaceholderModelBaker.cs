@@ -9,10 +9,7 @@ using UnityEngine.Rendering;
 
 namespace DiscoverTunisia.EditorTools
 {
-    /// <summary>
-    /// Bakes the primitive-built placeholder models into prefabs with mesh and material assets.
-    /// Swap a prefab reference in a GovernorateData asset to replace a placeholder with a real model.
-    /// </summary>
+    /// <summary>Bakes the primitive placeholder models into prefabs. Swap a GovernorateData model reference to use a real one.</summary>
     public static class PlaceholderModelBaker
     {
         private const string Art = "Assets/DiscoverTunisia/Art";
@@ -116,7 +113,7 @@ namespace DiscoverTunisia.EditorTools
             var spin = new GameObject("Spin");
             spin.transform.SetParent(root.transform, false);
 
-            var earthTex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Resources/Images/earth.jpg");
+            var earthTex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/DiscoverTunisia/Art/Textures/Earth.jpg");
             var earth = new GameObject("Earth");
             earth.transform.SetParent(spin.transform, false);
             earth.AddComponent<MeshFilter>().sharedMesh = SaveMesh(SphereMeshBuilder.Build(GlobeRadius), "EarthSphere");

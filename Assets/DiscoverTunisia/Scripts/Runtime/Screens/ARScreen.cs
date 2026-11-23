@@ -7,10 +7,7 @@ using UnityEngine.UIElements;
 
 namespace DiscoverTunisia.Screens
 {
-    /// <summary>
-    /// Places the selected governorate's monuments on the printed AR target. Without a working tracker it shows
-    /// the same models on a turntable in front of the camera.
-    /// </summary>
+    /// <summary>Puts the governorate's monuments on the printed target, or on a turntable when tracking is unavailable.</summary>
     public sealed class ARScreen : ScreenController
     {
         private const string TargetId = "cible";

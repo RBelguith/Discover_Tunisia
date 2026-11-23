@@ -10,11 +10,13 @@ namespace DiscoverTunisia.App
         public static GovernorateData Selected { get; private set; }
         public static SelectionSource Source { get; private set; }
 
+        [UnityEngine.RuntimeInitializeOnLoadMethod(UnityEngine.RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetOnPlay() => Select(null, SelectionSource.Manual);
+
         public static void Select(GovernorateData governorate, SelectionSource source)
         {
             Selected = governorate;
             Source = source;
-            Core.AppState.Select(governorate.Id, source == SelectionSource.Scan ? "scan" : "manuel");
         }
 
         /// <summary>The selection, or the catalog's first governorate when a scene is opened on its own.</summary>

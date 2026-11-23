@@ -6,10 +6,7 @@ using Vuforia;
 
 namespace DiscoverTunisia.AR
 {
-    /// <summary>
-    /// Image tracking with Vuforia Engine. Starts the engine with the license key from Resources, then creates
-    /// image targets at runtime from textures, so no Target Manager database is needed.
-    /// </summary>
+    /// <summary>Vuforia image tracking with runtime image targets made from textures, so no Target Manager database.</summary>
     public sealed class VuforiaImageTracker : ImageTracker
     {
         private const string LicenseResource = "VuforiaLicenseKey";
@@ -27,16 +24,30 @@ namespace DiscoverTunisia.AR
             app.OnVuforiaInitialized += OnInitialized;
             app.OnVuforiaStarted += OnStarted;
             app.OnVuforiaError += OnError;
-            if (app.IsInitialized) return;
-
-            var key = Resources.Load<TextAsset>(LicenseResource);
-            if (key == null || string.IsNullOrWhiteSpace(key.text))
+            if (!LoadLicenseKey())
             {
                 SetState(TrackerState.Failed, "La clé de licence Vuforia est absente. Voir le README, section Vuforia.");
                 return;
             }
-            VuforiaConfiguration.Instance.Vuforia.LicenseKey = key.text.Trim();
-            app.Initialize();
+            if (!app.IsInitialized) app.Initialize();
+        }
+
+        /// <summary>Puts the key on the config only for this session, so saving the config asset never writes it to disk.</summary>
+        private static bool LoadLicenseKey()
+        {
+            var config = VuforiaConfiguration.Instance.Vuforia;
+            if (!string.IsNullOrEmpty(config.LicenseKey)) return true;
+            var key = Resources.Load<TextAsset>(LicenseResource);
+            if (key == null || string.IsNullOrWhiteSpace(key.text)) return false;
+            config.LicenseKey = key.text.Trim();
+            Application.quitting += ClearLicenseKey;
+            return true;
+        }
+
+        private static void ClearLicenseKey()
+        {
+            Application.quitting -= ClearLicenseKey;
+            VuforiaConfiguration.Instance.Vuforia.LicenseKey = "";
         }
 
         private void Start() => Invoke(nameof(GiveUpIfStillStarting), startTimeout);

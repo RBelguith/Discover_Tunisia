@@ -10,6 +10,9 @@ namespace DiscoverTunisia.App
         private static readonly string[] Scenes = { "01_Accueil", "02_Identification", "03_Scan", "04_Globe", "05_AR" };
         private static bool _loading;
 
+        [UnityEngine.RuntimeInitializeOnLoadMethod(UnityEngine.RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetOnPlay() => _loading = false;
+
         public static string SceneName(AppScreen screen) => Scenes[(int)screen];
 
         public static void Go(AppScreen screen)

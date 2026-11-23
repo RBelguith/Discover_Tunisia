@@ -2,9 +2,7 @@ using UnityEngine;
 
 namespace DiscoverTunisia.World
 {
-    /// <summary>
-    /// Latitude/longitude on the globe mesh: lon 0 on +Z, lat 90 on +Y, east toward -X so the map reads unmirrored from outside.
-    /// </summary>
+    /// <summary>Geographic points on the globe mesh: lon 0 on +Z, lat 90 on +Y, east toward -X so the map is not mirrored.</summary>
     public static class GeoMath
     {
         public static Vector3 PointOnSphere(float radius, float latitude, float longitude)
@@ -15,9 +13,7 @@ namespace DiscoverTunisia.World
             return new Vector3(-c * Mathf.Sin(lon), Mathf.Sin(lat), c * Mathf.Cos(lon)) * radius;
         }
 
-        /// <summary>
-        /// Pitch (x) and yaw (y), applied as Euler(pitch, 0, 0) * Euler(0, yaw, 0), that turn a geographic point toward a unit direction.
-        /// </summary>
+        /// <summary>Pitch (x) and yaw (y) for Euler(pitch, 0, 0) * Euler(0, yaw, 0) that turn a point toward a direction.</summary>
         public static Vector2 AnglesToward(float latitude, float longitude, Vector3 direction)
         {
             float lat = latitude * Mathf.Deg2Rad;

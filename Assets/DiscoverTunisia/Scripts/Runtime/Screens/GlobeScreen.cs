@@ -8,10 +8,7 @@ using UnityEngine.UIElements;
 
 namespace DiscoverTunisia.Screens
 {
-    /// <summary>
-    /// Main screen: the globe centered on the governorate, its avatar, and the Monuments, Gastronomie and
-    /// Vêtements sections. Monuments also turn on a stand next to the section panel.
-    /// </summary>
+    /// <summary>Main screen: the globe on the governorate, its avatar, the three sections and the monument stand.</summary>
     public sealed class GlobeScreen : ScreenController
     {
         private enum Section { Monuments, Food, Clothes }
