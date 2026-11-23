@@ -17,6 +17,7 @@ namespace DiscoverTunisia.World
         private Color _accent;
         private bool _selected;
         private Vector3 _glowScale;
+        private Vector3 _baseGlowScale;
 
         public Transform Anchor => pinHead != null && _selected ? pinHead.transform : transform;
 
@@ -25,7 +26,8 @@ namespace DiscoverTunisia.World
             _block ??= new MaterialPropertyBlock();
             _accent = accent;
             _selected = selected;
-            _glowScale = Vector3.one * (selected ? 1.5f : 1f);
+            if (_baseGlowScale == Vector3.zero) _baseGlowScale = glow.transform.localScale;
+            _glowScale = _baseGlowScale * (selected ? 1.5f : 1f);
             glow.transform.localScale = _glowScale;
             pin.SetActive(selected);
             SetColor(glow, accent * (selected ? 1f : 0.55f));

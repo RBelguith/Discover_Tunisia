@@ -93,16 +93,16 @@ namespace DiscoverTunisia.EditorTools
             var dotTex = SaveTexture("MarkerDot", 128, SoftDisc);
 
             var root = new GameObject("Marker");
-            var glow = Primitive(PrimitiveType.Quad, "Glow", root.transform, new Vector3(0f, 0f, 0.02f), Vector3.one, Quaternion.Euler(0f, 180f, 0f));
+            var glow = Primitive(PrimitiveType.Quad, "Glow", root.transform, new Vector3(0f, 0f, 0.02f), new Vector3(0.6f, 0.6f, 1f), Quaternion.Euler(0f, 180f, 0f));
             glow.GetComponent<MeshRenderer>().sharedMaterial = Palette.Asset("M_MarkerGlow", Palette.UnlitShader, m => Palette.Transparent(m, Color.white, glowTex));
-            var dot = Primitive(PrimitiveType.Quad, "Dot", root.transform, new Vector3(0f, 0f, 0.045f), new Vector3(0.34f, 0.34f, 1f), Quaternion.Euler(0f, 180f, 0f));
+            var dot = Primitive(PrimitiveType.Quad, "Dot", root.transform, new Vector3(0f, 0f, 0.03f), new Vector3(0.15f, 0.15f, 1f), Quaternion.Euler(0f, 180f, 0f));
             dot.GetComponent<MeshRenderer>().sharedMaterial = Palette.Asset("M_MarkerDot", Palette.UnlitShader, m => Palette.Transparent(m, Color.white, dotTex));
 
             var pin = new GameObject("Pin");
             pin.transform.SetParent(root.transform, false);
-            var stem = Primitive(PrimitiveType.Cylinder, "Stem", pin.transform, new Vector3(0f, 0f, 0.30f), new Vector3(0.045f, 0.30f, 0.045f), Quaternion.Euler(90f, 0f, 0f));
+            var stem = Primitive(PrimitiveType.Cylinder, "Stem", pin.transform, new Vector3(0f, 0f, 0.17f), new Vector3(0.028f, 0.17f, 0.028f), Quaternion.Euler(90f, 0f, 0f));
             stem.GetComponent<MeshRenderer>().sharedMaterial = Palette.Asset("M_PinStem", Palette.UnlitShader, m => m.SetColor("_BaseColor", new Color(1f, 1f, 1f, 0.95f)));
-            var head = Primitive(PrimitiveType.Sphere, "Head", pin.transform, new Vector3(0f, 0f, 0.66f), Vector3.one * 0.30f);
+            var head = Primitive(PrimitiveType.Sphere, "Head", pin.transform, new Vector3(0f, 0f, 0.38f), Vector3.one * 0.15f);
             head.GetComponent<MeshRenderer>().sharedMaterial = Palette.Asset("M_PinHead", Palette.UnlitShader, m => m.SetColor("_BaseColor", Color.white));
 
             foreach (var r in root.GetComponentsInChildren<MeshRenderer>()) NoShadows(r);

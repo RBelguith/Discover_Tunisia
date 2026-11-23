@@ -1,0 +1,346 @@
+.top-bar__group {
+    flex-direction: row;
+}
+
+.top-bar__group > .btn {
+    margin-left: 16px;
+}
+
+.place-pill {
+    flex-direction: row;
+    align-items: center;
+    height: 104px;
+    padding: 0 48px 0 32px;
+    border-radius: 52px;
+    background-color: var(--c-panel);
+    border-width: 1px;
+    border-color: var(--c-line);
+}
+
+.place-pill > .icon {
+    width: 48px;
+    height: 48px;
+    margin-right: 20px;
+}
+
+.place-pill__name {
+    font-size: 44px;
+    -unity-font-definition: url("project://database/Assets/DiscoverTunisia/UI/Fonts/Poppins-Bold-SDF.asset");
+}
+
+.place-pill__subtitle {
+    margin-top: -6px;
+    font-size: 22px;
+    color: var(--c-text-2);
+}
+
+/* Menu */
+
+.menu {
+    position: absolute;
+    right: 48px;
+    top: 50%;
+    translate: 0 -50%;
+}
+
+.menu-btn {
+    width: 470px;
+    height: 116px;
+    margin-bottom: 20px;
+    justify-content: flex-start;
+    padding-left: 36px;
+    border-radius: 30px;
+    border-width: 1px;
+    border-color: var(--c-line);
+    background-color: var(--c-panel);
+    font-size: 32px;
+}
+
+.menu-btn > .icon {
+    width: 52px;
+    height: 52px;
+    margin-right: 24px;
+}
+
+.menu-btn--monuments > .icon { -unity-background-image-tint-color: var(--c-accent); }
+.menu-btn--food > .icon { -unity-background-image-tint-color: var(--c-gold); }
+.menu-btn--clothes > .icon { -unity-background-image-tint-color: #FF8A94; }
+
+.menu-btn--ar {
+    margin-bottom: 0;
+    border-width: 0;
+    background-color: var(--c-accent);
+    color: var(--c-accent-ink);
+}
+
+.menu-btn--ar:hover {
+    background-color: var(--c-accent-hover);
+}
+
+.menu-btn--ar > .icon {
+    -unity-background-image-tint-color: var(--c-accent-ink);
+}
+
+/* About carousel */
+
+.about {
+    position: absolute;
+    left: 50%;
+    bottom: 36px;
+    width: 880px;
+    translate: -62% 0;
+    padding: 26px 30px;
+}
+
+.about__head {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.about__head > .icon {
+    width: 34px;
+    height: 34px;
+    margin-right: 12px;
+    -unity-background-image-tint-color: var(--c-accent);
+}
+
+.about__title {
+    font-size: 30px;
+    -unity-font-definition: url("project://database/Assets/DiscoverTunisia/UI/Fonts/Poppins-SemiBold-SDF.asset");
+}
+
+.about__body {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.about__body > .btn {
+    width: 64px;
+    height: 64px;
+}
+
+.about__text {
+    flex-grow: 1;
+    flex-basis: 0;
+    height: 112px;
+    margin: 0 18px;
+    font-size: 25px;
+    white-space: normal;
+    -unity-text-align: middle-center;
+    color: var(--c-text-2);
+}
+
+.about__foot {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+.dots {
+    flex-direction: row;
+    margin-left: 82px;
+}
+
+.dot {
+    width: 16px;
+    height: 16px;
+    margin-right: 12px;
+    border-radius: 8px;
+    background-color: var(--c-panel-soft);
+    transition-duration: 0.2s;
+}
+
+.dot--active {
+    width: 40px;
+    background-color: var(--c-accent);
+}
+
+.more-btn {
+    height: 64px;
+    padding: 0 26px;
+    font-size: 25px;
+    color: var(--c-accent);
+}
+
+.more-btn > .icon {
+    width: 28px;
+    height: 28px;
+    -unity-background-image-tint-color: var(--c-accent);
+}
+
+/* Drag hint */
+
+.hint {
+    position: absolute;
+    left: 40px;
+    bottom: 40px;
+}
+
+/* Marker labels */
+
+.callout {
+    position: absolute;
+    left: 44px;
+    top: -70px;
+    padding: 10px;
+    border-radius: 22px;
+    background-color: rgba(8, 19, 45, 0.78);
+    border-width: 1px;
+    border-color: var(--c-line);
+}
+
+.callout__item {
+    flex-direction: row;
+    align-items: center;
+    height: 44px;
+    padding: 0 16px 0 12px;
+    margin: 0;
+    border-radius: 14px;
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+    color: var(--c-text-2);
+    font-size: 24px;
+}
+
+.callout__item:hover {
+    background-color: var(--c-panel-soft);
+}
+
+.callout__item--selected {
+    color: var(--c-text);
+    font-size: 30px;
+    -unity-font-definition: url("project://database/Assets/DiscoverTunisia/UI/Fonts/Poppins-Bold-SDF.asset");
+}
+
+.callout__dot {
+    width: 14px;
+    height: 14px;
+    margin-right: 12px;
+    border-radius: 7px;
+}
+
+/* Section panel */
+
+.section {
+    display: none;
+    position: absolute;
+    left: 40px;
+    top: 168px;
+    bottom: 36px;
+    width: 900px;
+    padding: 30px 36px;
+    overflow: hidden;
+}
+
+.section--open {
+    display: flex;
+}
+
+.section__head {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section__title {
+    font-size: 42px;
+    -unity-font-definition: url("project://database/Assets/DiscoverTunisia/UI/Fonts/Poppins-Bold-SDF.asset");
+}
+
+.tabs {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+
+.tab {
+    height: 56px;
+    padding: 0 22px;
+    margin: 0 12px 12px 0;
+    border-radius: 28px;
+    border-width: 1px;
+    border-color: var(--c-line);
+    background-color: var(--c-panel-soft);
+    color: var(--c-text-2);
+    font-size: 23px;
+    transition-duration: 0.15s;
+}
+
+.tab:hover {
+    background-color: var(--c-panel-hover);
+}
+
+.tab--selected {
+    background-color: var(--c-accent);
+    border-color: var(--c-accent);
+    color: var(--c-accent-ink);
+    -unity-font-definition: url("project://database/Assets/DiscoverTunisia/UI/Fonts/Poppins-SemiBold-SDF.asset");
+}
+
+.detail__image {
+    height: 300px;
+    margin-top: 10px;
+    border-radius: 22px;
+    -unity-background-scale-mode: scale-and-crop;
+    flex-shrink: 1;
+    min-height: 150px;
+}
+
+.detail__name {
+    margin-top: 20px;
+    font-size: 34px;
+    white-space: normal;
+    flex-shrink: 0;
+    -unity-font-definition: url("project://database/Assets/DiscoverTunisia/UI/Fonts/Poppins-Bold-SDF.asset");
+}
+
+.detail__text {
+    margin-top: 8px;
+    font-size: 24px;
+    white-space: normal;
+    flex-shrink: 0;
+    color: var(--c-text-2);
+}
+
+.detail__hint {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 16px;
+    flex-shrink: 0;
+}
+
+.detail__hint > .icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 12px;
+    -unity-background-image-tint-color: var(--c-accent);
+}
+
+.detail__hint > Label {
+    color: var(--c-accent);
+    font-size: 23px;
+    flex-shrink: 1;
+    white-space: normal;
+}
+
+/* Modal */
+
+.modal__text {
+    margin-top: 16px;
+    font-size: 27px;
+    white-space: normal;
+    -unity-text-align: middle-center;
+    color: var(--c-text-2);
+}
+
+.modal__actions {
+    width: 640px;
+    margin-top: 36px;
+}
+
+.modal__action {
+    margin-bottom: 14px;
+}

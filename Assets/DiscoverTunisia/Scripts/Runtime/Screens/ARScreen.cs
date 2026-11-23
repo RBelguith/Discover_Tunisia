@@ -1,6 +1,7 @@
 using DiscoverTunisia.App;
 using DiscoverTunisia.Content;
 using DiscoverTunisia.Tracking;
+using DiscoverTunisia.World;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -99,7 +100,7 @@ namespace DiscoverTunisia.Screens
             Root.Q<Label>("monumentCount").text = (_index + 1) + " / " + monuments.Count;
             if (_model != null) Destroy(_model);
             _model = entry.Model != null ? Instantiate(entry.Model) : null;
-            if (_model != null) _bounds = Measure(_model);
+            if (_model != null) _bounds = ModelFitter.Measure(_model);
             Place();
         }
 
@@ -108,43 +109,17 @@ namespace DiscoverTunisia.Screens
             if (_model == null) return;
             if (_preview)
             {
-                Fit(previewSpot, previewFootprint);
+                ModelFitter.Fit(_model.transform, _bounds, previewSpot, previewFootprint);
                 _model.SetActive(true);
             }
             else if (_anchor != null)
             {
-                Fit(_anchor, targetWidth * footprintOnTarget);
+                ModelFitter.Fit(_model.transform, _bounds, _anchor, targetWidth * footprintOnTarget);
                 _model.SetActive(_quality != TrackingQuality.None);
             }
             else _model.SetActive(false);
         }
 
-        /// <summary>Model bounds at unit scale, measured once while the fresh instance is still active.</summary>
-        private static Bounds Measure(GameObject model)
-        {
-            model.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
-            model.transform.localScale = Vector3.one;
-            var bounds = new Bounds();
-            bool first = true;
-            foreach (var r in model.GetComponentsInChildren<Renderer>())
-            {
-                if (first) { bounds = r.bounds; first = false; }
-                else bounds.Encapsulate(r.bounds);
-            }
-            return bounds;
-        }
-
-        /// <summary>Parents the model and scales it so its footprint spans the given world size, base on the parent's plane.</summary>
-        private void Fit(Transform parent, float worldFootprint)
-        {
-            float footprint = Mathf.Max(_bounds.size.x, _bounds.size.z, 0.001f);
-            float scale = worldFootprint / footprint / Mathf.Max(parent.lossyScale.x, 0.0001f);
-            var model = _model.transform;
-            model.SetParent(parent, false);
-            model.localRotation = Quaternion.identity;
-            model.localScale = Vector3.one * scale;
-            model.localPosition = new Vector3(-_bounds.center.x, -_bounds.min.y, -_bounds.center.z) * scale;
-        }
 
         private void RefreshStatus()
         {

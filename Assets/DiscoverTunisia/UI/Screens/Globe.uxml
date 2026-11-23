@@ -1,0 +1,97 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="project://database/Assets/DiscoverTunisia/UI/Styles/Theme.uss" />
+    <ui:Style src="Globe.uss" />
+    <ui:VisualElement name="screen" class="screen" picking-mode="Ignore">
+        <ui:VisualElement name="callout" class="callout" />
+        <ui:VisualElement class="top-bar" picking-mode="Ignore">
+            <ui:Button name="backButton" class="btn icon-btn">
+                <ui:VisualElement class="icon icon--back" />
+            </ui:Button>
+            <ui:VisualElement class="place-pill">
+                <ui:VisualElement name="pinIcon" class="icon icon--pin" />
+                <ui:VisualElement picking-mode="Ignore">
+                    <ui:Label name="governorateName" text="Kairouan" class="place-pill__name" />
+                    <ui:Label name="governorateSubtitle" text="Centre, ville sainte" class="place-pill__subtitle" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="top-bar__group" picking-mode="Ignore">
+                <ui:Button name="settingsButton" class="btn icon-btn">
+                    <ui:VisualElement class="icon icon--settings" />
+                </ui:Button>
+                <ui:Button name="homeButton" class="btn icon-btn">
+                    <ui:VisualElement class="icon icon--home" />
+                </ui:Button>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="menu" class="menu" picking-mode="Ignore">
+            <ui:Button name="monumentsButton" class="btn menu-btn menu-btn--monuments">
+                <ui:VisualElement class="icon icon--monuments" />
+                <ui:Label text="Monuments" />
+            </ui:Button>
+            <ui:Button name="foodButton" class="btn menu-btn menu-btn--food">
+                <ui:VisualElement class="icon icon--food" />
+                <ui:Label text="Gastronomie" />
+            </ui:Button>
+            <ui:Button name="clothesButton" class="btn menu-btn menu-btn--clothes">
+                <ui:VisualElement class="icon icon--clothing" />
+                <ui:Label text="Vêtements traditionnels" />
+            </ui:Button>
+            <ui:Button name="arButton" class="btn menu-btn menu-btn--ar">
+                <ui:VisualElement class="icon icon--ar" />
+                <ui:Label text="Voir en réalité augmentée" />
+            </ui:Button>
+        </ui:VisualElement>
+        <ui:VisualElement name="about" class="panel about">
+            <ui:VisualElement class="about__head" picking-mode="Ignore">
+                <ui:VisualElement class="icon icon--info" />
+                <ui:Label name="aboutTitle" text="À propos" class="about__title" />
+            </ui:VisualElement>
+            <ui:VisualElement class="about__body" picking-mode="Ignore">
+                <ui:Button name="prevSlideButton" class="btn icon-btn">
+                    <ui:VisualElement class="icon icon--back" />
+                </ui:Button>
+                <ui:Label name="slideText" class="about__text" />
+                <ui:Button name="nextSlideButton" class="btn icon-btn">
+                    <ui:VisualElement class="icon icon--next" />
+                </ui:Button>
+            </ui:VisualElement>
+            <ui:VisualElement class="about__foot" picking-mode="Ignore">
+                <ui:VisualElement name="dots" class="dots" picking-mode="Ignore" />
+                <ui:Button name="moreButton" class="btn more-btn">
+                    <ui:Label text="En savoir plus" />
+                    <ui:VisualElement class="icon icon--next icon--trailing" />
+                </ui:Button>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="hint" class="chip hint" picking-mode="Ignore">
+            <ui:VisualElement class="icon icon--globe" />
+            <ui:Label text="Faites glisser pour tourner le globe" />
+        </ui:VisualElement>
+        <ui:VisualElement name="section" class="panel section">
+            <ui:VisualElement class="section__head" picking-mode="Ignore">
+                <ui:VisualElement picking-mode="Ignore">
+                    <ui:Label name="sectionEyebrow" text="KAIROUAN" class="eyebrow" />
+                    <ui:Label name="sectionTitle" text="Monuments" class="section__title" />
+                </ui:VisualElement>
+                <ui:Button name="closeSectionButton" class="btn icon-btn">
+                    <ui:VisualElement class="icon icon--close" />
+                </ui:Button>
+            </ui:VisualElement>
+            <ui:VisualElement name="tabs" class="tabs" picking-mode="Ignore" />
+            <ui:VisualElement name="detailImage" class="detail__image" />
+            <ui:Label name="detailName" class="detail__name" />
+            <ui:Label name="detailText" class="detail__text" />
+            <ui:VisualElement name="modelHint" class="detail__hint" picking-mode="Ignore">
+                <ui:VisualElement class="icon icon--ar" />
+                <ui:Label text="Le modèle 3D tourne à droite. Voyez-le en réalité augmentée depuis le menu." />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="modal" class="veil hidden">
+            <ui:VisualElement class="panel sheet">
+                <ui:Label name="modalTitle" class="sheet__title" />
+                <ui:Label name="modalText" class="modal__text" />
+                <ui:VisualElement name="modalActions" class="modal__actions" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
