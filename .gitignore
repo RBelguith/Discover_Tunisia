@@ -84,3 +84,6 @@ crashlytics-build.properties
 # Vuforia license key, kept local
 /[Aa]ssets/DiscoverTunisia/Settings/Resources/VuforiaLicenseKey.txt
 /[Aa]ssets/DiscoverTunisia/Settings/Resources/VuforiaLicenseKey.txt.meta
+
+# Vuforia runtime data written in Play Mode
+/QCAR/

@@ -1,0 +1,31 @@
+{
+    "name": "DiscoverTunisia.AR",
+    "rootNamespace": "DiscoverTunisia.AR",
+    "references": [
+        "DiscoverTunisia"
+    ],
+    "includePlatforms": [
+        "Android",
+        "Editor",
+        "iOS",
+        "macOSStandalone",
+        "WSA",
+        "WindowsStandalone64"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "DT_VUFORIA"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.ptc.vuforia.engine",
+            "expression": "",
+            "define": "DT_VUFORIA"
+        }
+    ],
+    "noEngineReferences": false
+}

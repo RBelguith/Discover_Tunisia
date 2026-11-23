@@ -1,0 +1,64 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="project://database/Assets/DiscoverTunisia/UI/Styles/Theme.uss" />
+    <ui:Style src="Scan.uss" />
+    <ui:VisualElement name="screen" class="screen" picking-mode="Ignore">
+        <ui:VisualElement name="reticle" class="reticle" picking-mode="Ignore">
+            <ui:VisualElement class="corner corner--tl" picking-mode="Ignore" />
+            <ui:VisualElement class="corner corner--tr" picking-mode="Ignore" />
+            <ui:VisualElement class="corner corner--bl" picking-mode="Ignore" />
+            <ui:VisualElement class="corner corner--br" picking-mode="Ignore" />
+        </ui:VisualElement>
+        <ui:VisualElement class="status-pill" picking-mode="Ignore">
+            <ui:VisualElement class="status-pill__body" picking-mode="Ignore">
+                <ui:VisualElement class="icon icon--scan" />
+                <ui:Label name="statusText" text="Démarrage de la caméra..." />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement class="top-bar" picking-mode="Ignore">
+            <ui:Button name="backButton" class="btn icon-btn">
+                <ui:VisualElement class="icon icon--close" />
+            </ui:Button>
+            <ui:VisualElement class="top-bar__title" picking-mode="Ignore">
+                <ui:Label text="SCAN D'UNE CARTE RÉGION" class="eyebrow" />
+                <ui:Label text="Présentez la photo à la caméra" class="screen-title" />
+            </ui:VisualElement>
+            <ui:VisualElement class="top-bar__spacer" picking-mode="Ignore" />
+        </ui:VisualElement>
+        <ui:VisualElement name="result" class="veil hidden">
+            <ui:VisualElement class="panel sheet">
+                <ui:VisualElement name="resultPhoto" class="result__photo" />
+                <ui:VisualElement class="result__name-line">
+                    <ui:VisualElement name="resultDot" class="result__dot" />
+                    <ui:Label name="resultName" text="Kairouan" class="result__name" />
+                </ui:VisualElement>
+                <ui:Label name="resultSubtitle" text="Centre, ville sainte" class="sheet__text" />
+                <ui:Label text="Carte reconnue. Vous pouvez continuer vers le globe ou scanner une autre carte." class="faint sheet__note" />
+                <ui:VisualElement class="sheet__actions">
+                    <ui:Button name="retryButton" class="btn">
+                        <ui:VisualElement class="icon icon--refresh" />
+                        <ui:Label text="Scanner une autre carte" />
+                    </ui:Button>
+                    <ui:Button name="continueButton" class="btn btn--primary">
+                        <ui:Label text="Continuer vers le globe" />
+                        <ui:VisualElement class="icon icon--next icon--trailing" />
+                    </ui:Button>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="failure" class="veil hidden">
+            <ui:VisualElement class="panel sheet">
+                <ui:VisualElement class="badge">
+                    <ui:VisualElement class="icon icon--info" />
+                </ui:VisualElement>
+                <ui:Label text="Scan indisponible" class="sheet__title" />
+                <ui:Label name="failureText" class="sheet__text" />
+                <ui:VisualElement class="sheet__actions">
+                    <ui:Button name="failureBackButton" class="btn btn--primary">
+                        <ui:VisualElement class="icon icon--back" />
+                        <ui:Label text="Choisir dans la liste" />
+                    </ui:Button>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

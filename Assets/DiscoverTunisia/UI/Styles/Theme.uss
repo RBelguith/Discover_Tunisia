@@ -219,3 +219,120 @@
 .icon--refresh { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/refresh.svg"); }
 .icon--card { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/card.svg"); }
 .icon--search { background-image: url("project://database/Assets/DiscoverTunisia/UI/Icons/search.svg"); }
+
+/* Overlays and status */
+
+.veil {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--c-veil);
+}
+
+.sheet {
+    width: 1060px;
+    align-items: center;
+    padding: 48px 56px;
+}
+
+.sheet__title {
+    margin-top: 24px;
+    font-size: 40px;
+    -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/DiscoverTunisia/UI/Fonts/Poppins-Bold-SDF.asset");
+}
+
+.sheet__text {
+    margin-top: 12px;
+    font-size: 27px;
+    white-space: normal;
+    -unity-text-align: middle-center;
+    color: var(--c-text-2);
+}
+
+.sheet__actions {
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.sheet__actions > .btn {
+    margin: 0 10px;
+}
+
+.badge {
+    width: 112px;
+    height: 112px;
+    border-radius: 56px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(79, 195, 247, 0.14);
+    border-width: 2px;
+    border-color: rgba(79, 195, 247, 0.45);
+}
+
+.badge > .icon {
+    width: 56px;
+    height: 56px;
+    -unity-background-image-tint-color: var(--c-accent);
+}
+
+.badge--success {
+    background-color: rgba(51, 209, 115, 0.16);
+    border-color: rgba(51, 209, 115, 0.6);
+}
+
+.badge--success > .icon {
+    -unity-background-image-tint-color: var(--c-success);
+}
+
+.status-pill {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 56px;
+    align-items: center;
+}
+
+.status-pill__body {
+    flex-direction: row;
+    align-items: center;
+    max-width: 1300px;
+    padding: 18px 34px 18px 26px;
+    border-radius: 40px;
+    background-color: var(--c-panel);
+    border-width: 1px;
+    border-color: var(--c-line);
+}
+
+.status-pill__body > .icon {
+    margin-right: 16px;
+    -unity-background-image-tint-color: var(--c-accent);
+}
+
+.status-pill__body > Label {
+    font-size: 28px;
+    white-space: normal;
+}
+
+.status-pill--tracked .status-pill__body {
+    border-color: rgba(51, 209, 115, 0.6);
+}
+
+.status-pill--tracked .status-pill__body > .icon {
+    -unity-background-image-tint-color: var(--c-success);
+}
+
+.status-pill--preview .status-pill__body > .icon {
+    -unity-background-image-tint-color: var(--c-gold);
+}
+
+.sheet__note {
+    margin-top: 18px;
+    white-space: normal;
+    -unity-text-align: middle-center;
+}

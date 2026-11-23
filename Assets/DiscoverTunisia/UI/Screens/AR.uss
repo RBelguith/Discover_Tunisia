@@ -1,0 +1,33 @@
+.ar__dock {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 150px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.ar__card {
+    flex-direction: row;
+    align-items: center;
+    width: 900px;
+    padding: 18px;
+    border-radius: 48px;
+}
+
+.ar__card-text {
+    flex-grow: 1;
+    align-items: center;
+}
+
+.ar__monument {
+    font-size: 34px;
+    -unity-text-align: middle-center;
+    white-space: normal;
+    -unity-font-definition: url("project://database/Assets/DiscoverTunisia/UI/Fonts/Poppins-SemiBold-SDF.asset");
+}
+
+.status-pill {
+    bottom: 48px;
+}

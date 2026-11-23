@@ -3,6 +3,7 @@ using System.Linq;
 using DiscoverTunisia.Content;
 using NUnit.Framework;
 using UnityEditor;
+using UnityEngine;
 
 namespace DiscoverTunisia.Tests
 {
@@ -40,6 +41,14 @@ namespace DiscoverTunisia.Tests
         {
             Assert.That(g.Latitude, Is.InRange(30f, 37.6f));
             Assert.That(g.Longitude, Is.InRange(7.5f, 11.7f));
+        }
+
+        [TestCaseSource(nameof(Governorates))]
+        public void Governorate_ScanCardCanBeTracked(GovernorateData g)
+        {
+            Assert.That(g.ScanCard, Is.Not.Null, g.DisplayName + " has no scan card");
+            Assert.That(g.ScanCard.isReadable, Is.True, "Vuforia copies the pixels, so the texture must be Read/Write enabled");
+            Assert.That(Mathf.Max(g.ScanCard.width, g.ScanCard.height), Is.LessThanOrEqualTo(2048), "Vuforia rejects images over 2048 px");
         }
 
         [TestCaseSource(nameof(Governorates))]

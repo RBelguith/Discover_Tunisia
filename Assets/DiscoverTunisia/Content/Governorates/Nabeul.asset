@@ -37,4 +37,4 @@ MonoBehaviour:
   - title: "Caftan brod\xE9 et parures du cap Bon"
     description: "Les ateliers de la m\xE9dina perp\xE9tuent le caftan de soie orn\xE9 de fil d'or et la ch\xE9chia, coiffure de feutre rouge embl\xE9matique de la Tunisie. La mari\xE9e du cap Bon porte le khit er rouh (\xAB fil de l'\xE2me \xBB), longue cha\xEEne d'argent offerte par la famille du mari\xE9, avec des boucles d'oreilles et des bracelets cisel\xE9s."
     image: {fileID: 21300000, guid: adb9c8dd0d7765143a8d5da36b8efc4e, type: 3}
-  scanCard: {fileID: 0}
+  scanCard: {fileID: 2800000, guid: 99c6729ff1a8b4080b9c35e6c265bf1c, type: 3}
