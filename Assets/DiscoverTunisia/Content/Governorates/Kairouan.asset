@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0db6e89443ce5488db00a227fd4cc61f, type: 3}
+  m_Name: Kairouan
+  m_EditorClassIdentifier: DiscoverTunisia::DiscoverTunisia.Content.GovernorateData
+  id: kairouan
+  displayName: Kairouan
+  subtitle: Centre, ville sainte
+  description: "Capitale de l'Ifriqiya pendant cinq si\xE8cles et souvent appel\xE9e quatri\xE8me ville sainte de l'islam, Kairouan est inscrite au patrimoine mondial de l'UNESCO depuis 1988. M\xE9dina, souks organis\xE9s par corporations et ateliers de tapis en font la premi\xE8re ville sainte du Maghreb."
+  shortBlurb: Kairouan, ville sainte et patrimoine mondial de l'UNESCO, berceau des tapis tunisiens.
+  latitude: 35.68
+  longitude: 10.1
+  accentColor: {r: 0.95, g: 0.3, b: 0.35, a: 1}
+  monuments:
+  - title: "Grande mosqu\xE9e de Kairouan"
+    description: "Fond\xE9e vers 670 par Oqba Ibn Nafi, elle est le plus ancien et le plus prestigieux monument islamique du Maghreb. Son minaret, \xE9difi\xE9 entre le VIIIe et le IXe si\xE8cle, est le plus ancien au monde encore debout, et son minbar de 862, la plus ancienne chaire du monde musulman."
+    image: {fileID: 21300000, guid: 6a9d8ef826c8f064d85f1f2be779e721, type: 3}
+    model: {fileID: 0}
+  - title: "Mosqu\xE9e des Trois Portes"
+    description: "B\xE2tie en 866, elle est consid\xE9r\xE9e comme la plus ancienne mosqu\xE9e \xE0 fa\xE7ade sculpt\xE9e de l'islam. Sa fa\xE7ade haute de sept m\xE8tres porte trois frises d'inscriptions koufiques d'une rare finesse."
+    image: {fileID: 21300000, guid: c76ca4a304c44a1469c6ee86434155cf, type: 3}
+    model: {fileID: 0}
+  - title: "Mausol\xE9e du Barbier"
+    description: "Vaste zaou\xEFa \xE9rig\xE9e au XVIIe si\xE8cle autour du tombeau d'Abou Zamaa el-Balaoui, compagnon du Proph\xE8te. Ses coupoles c\xF4tel\xE9es, ses c\xE9ramiques \xE0 la mode turque et ses plafonds sculpt\xE9s en font l'un des lieux les plus visit\xE9s de Kairouan."
+    image: {fileID: 21300000, guid: 49a8cae8de83330469b1311aa60a6169, type: 3}
+    model: {fileID: 0}
+  foods:
+  - title: Makroud de Kairouan
+    description: "P\xE2tisserie embl\xE9matique introduite dans la r\xE9gion par les Aghlabides : une semoule fourr\xE9e d'une p\xE2te de dattes, coup\xE9e en losanges et tremp\xE9e dans le miel. Servi lors des f\xEAtes et des mariages, le makroud accompagne le th\xE9 \xE0 la menthe des grandes occasions."
+    image: {fileID: 21300000, guid: 038a572c8863f7149867cbc2cec926a1, type: 3}
+  clothes:
+  - title: Caftan de la ville sainte
+    description: "\xC0 Kairouan, ville des m\xE9tiers d'art, la tenue de f\xEAte associe le caftan de soie brod\xE9, la ch\xE9chia rouge et de larges ceintures orn\xE9es. La mari\xE9e y re\xE7oit le khit er rouh, longue cha\xEEne d'argent symbole de la b\xE9n\xE9diction familiale, dans une parure compl\xE9t\xE9e par boucles et bracelets cisel\xE9s."
+    image: {fileID: 21300000, guid: 8b6be90a42e10ad41848531f5f9a4d6a, type: 3}
+  scanCard: {fileID: 0}
