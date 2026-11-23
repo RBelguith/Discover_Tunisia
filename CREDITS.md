@@ -1,21 +1,24 @@
-# Crédits — Discover Tunisia
+# Crédits
 
 ## Textes
 
 Les présentations des gouvernorats et des éléments patrimoniaux sont rédigées
-à partir des articles Wikipédia (licence **CC BY-SA / GFDL**) : « Nabeul »,
+à partir des articles Wikipédia (licence CC BY-SA / GFDL) : « Nabeul »,
 « Bizerte », « Kairouan », et les articles liés (Néapolis, médina de Nabeul,
 vieux port de Bizerte, ruines d'Utique, Grande Mosquée de Kairouan, Mosquée des
 Trois Portes, Mausolée du Barbier, makroud, poupées de sucre de Nabeul).
 
-Ces textes sont des supports pédagogiques et doivent être relus/validés par
+Ces textes sont des supports pédagogiques et doivent être relus et validés par
 l'encadrant avant toute diffusion publique.
 
 ## Images (Wikimedia Commons, licences libres)
 
+Les photos sont dans `Assets/DiscoverTunisia/Content/Images/`. La texture de la
+Terre est `Assets/DiscoverTunisia/Art/Textures/Earth.jpg`.
+
 | Fichier local | Fichier d'origine (Wikimedia Commons) |
 |---|---|
-| `earth.jpg` | *Whole world - land and oceans 12000.jpg* (NASA, domaine public) |
+| `Earth.jpg` | *Whole world - land and oceans 12000.jpg* (NASA, domaine public) |
 | `nabeul_neapolis.jpg` | *New Neapolis ruins, Feb, 2026, ZVE08405.jpg* |
 | `nabeul_medina.jpg` | *Nabeul Souk R01.jpg* |
 | `nabeul_food.jpg` | *Poupées de sucre de Nabeul 01.jpg* |
@@ -31,16 +34,36 @@ l'encadrant avant toute diffusion publique.
 | `kairouan_clothes.jpg` | *Sefsari old & young.jpg* |
 
 La licence exacte de chaque fichier est indiquée sur sa page Wikimedia Commons.
-Les vignettes ont été redimensionnées à 1400–2048 px lors du téléchargement.
+Les vignettes ont été redimensionnées à 1400-2048 px lors du téléchargement.
 
-## Modèles 3D et interface
+Les cartes de région à imprimer (`Assets/DiscoverTunisia/AR/ScanCards/`) sont
+trois de ces photos redimensionnées à 1024 px : `nabeul_neapolis.jpg`,
+`bizerte_port.jpg` et `kairouan_mosquee.jpg`.
 
-- Les monuments 3D et l'avatar sont des **maquettes procédurales** générées à
-  partir de primitives Unity (`Assets/Scripts/Globe/`), sans modèle tiers.
-- Les icônes, halos, dégradés et la cible `CIBLE_AR.png` (motif aléatoire à fort
-  contraste) sont **générés par le code** : aucun asset payant.
-- URP et Input System : Unity Technologies. Vuforia Engine : PTC (à installer
-  séparément avec une licence propre, voir `README.md`).
+## Police
 
-Aucune donnée personnelle n'est collectée : le scan d'identité est une
-simulation avec des données fictives.
+Poppins (Regular, SemiBold et Bold), The Poppins Project Authors, sous licence
+SIL Open Font License 1.1. Le texte de la licence est dans
+`Assets/DiscoverTunisia/UI/Fonts/OFL.txt`.
+
+## Modèles 3D, icônes et cible
+
+- Les monuments, l'avatar, le globe et ses repères sont des maquettes
+  construites à partir de formes simples par l'outil d'édition du projet
+  (menu Discover Tunisia > Rebuild Placeholder Models), sans modèle tiers. Le
+  même outil génère les textures des repères et du ciel étoilé.
+- Les icônes SVG de `Assets/DiscoverTunisia/UI/Icons/` ont été dessinées pour
+  le projet.
+- La cible `Assets/DiscoverTunisia/AR/Targets/CIBLE_AR.png` est un motif à fort
+  contraste créé pour le projet.
+
+## Logiciels
+
+- URP, UI Toolkit et Input System : Unity Technologies.
+- Vuforia Engine 11.4.4 : PTC. Le paquet n'est pas inclus dans le dépôt et
+  demande une clé de licence propre (voir `README.md`).
+
+## Données personnelles
+
+L'application ne collecte aucune donnée personnelle. Le scan reconnaît une
+carte de région imprimée et n'enregistre pas les images de la caméra.
