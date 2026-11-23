@@ -6,16 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/01_Accueil.unity
+    path: Assets/DiscoverTunisia/Scenes/01_Accueil.unity
     guid: b1000000000000000000000000000001
   - enabled: 1
-    path: Assets/Scenes/02_Identification.unity
+    path: Assets/DiscoverTunisia/Scenes/02_Identification.unity
     guid: b1000000000000000000000000000002
   - enabled: 1
-    path: Assets/Scenes/03_Globe.unity
+    path: Assets/DiscoverTunisia/Scenes/03_Globe.unity
     guid: b1000000000000000000000000000003
   - enabled: 1
-    path: Assets/Scenes/04_AR.unity
+    path: Assets/DiscoverTunisia/Scenes/04_AR.unity
     guid: b1000000000000000000000000000004
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
