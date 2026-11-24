@@ -76,7 +76,7 @@ blender --background --python Tools/Blender/monuments.py -- --out Assets/Discove
 
 Unity imports the new files and the prefabs follow. Each material in the script must have the name of a material in `Art/Materials/`, or the tests fail.
 
-To use another model, drag its prefab into the monument's `Model` field in the governorate asset. The globe and AR screens scale it to fit.
+To use a model from elsewhere, export it as an FBX into `Art/Models/` with materials named after the ones in `Art/Materials/`, then point the monument's prefab at it. The globe and AR screens scale it to fit.
 
 The avatar, the globe and its markers are built from simple shapes. **Discover Tunisia > Rebuild Placeholder Models** rebuilds them and overwrites their prefabs.
 

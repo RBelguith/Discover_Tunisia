@@ -23,11 +23,36 @@ namespace DiscoverTunisia.Tests
                     yield return new TestCaseData(g.Id, i).Returns(null);
         }
 
+        public static IEnumerable<TestCaseData> GovernoratesWithSeveralMonuments()
+        {
+            foreach (var g in ScreenDriver.Catalog().Governorates)
+                if (g.Monuments.Count > 1) yield return new TestCaseData(g.Id).Returns(null);
+        }
+
         [SetUp]
         public void SetUp()
         {
             ImageTracker.CameraDisabled = true;
             AppSession.Select(null, SelectionSource.Manual);
+        }
+
+        [UnityTest, TestCaseSource(nameof(GovernoratesWithSeveralMonuments))]
+        public IEnumerator ArrowButtons_WrapAroundTheMonuments(string governorateId)
+        {
+            var monuments = ScreenDriver.Catalog().Find(governorateId).Monuments;
+            var last = monuments.Count - 1;
+            yield return Show(governorateId, 0);
+            var root = ScreenDriver.Root();
+            Assert.That(root.Q<Label>("monumentCount").text, Is.EqualTo("1 / " + monuments.Count));
+
+            yield return ScreenDriver.Tap("prevButton");
+            Assert.That(root.Q<Label>("monumentName").text, Is.EqualTo(monuments[last].Title), "Previous from the first monument should show the last one");
+            Assert.That(root.Q<Label>("monumentCount").text, Is.EqualTo(monuments.Count + " / " + monuments.Count));
+            Assert.That(GameObject.Find(monuments[last].Model.name + "(Clone)"), Is.Not.Null, "The last monument's model should show");
+
+            yield return ScreenDriver.Tap("nextButton");
+            Assert.That(root.Q<Label>("monumentName").text, Is.EqualTo(monuments[0].Title), "Next from the last monument should show the first one");
+            Assert.That(root.Q<Label>("monumentCount").text, Is.EqualTo("1 / " + monuments.Count));
         }
 
         [TearDown]
