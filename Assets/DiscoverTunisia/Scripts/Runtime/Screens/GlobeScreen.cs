@@ -263,7 +263,7 @@ namespace DiscoverTunisia.Screens
             ShowModal("À propos et crédits",
                 "Discover Tunisia, projet universitaire de découverte du patrimoine tunisien en 3D et en réalité augmentée.\n\n" +
                 "Textes rédigés d'après Wikipédia (CC BY-SA). Photos de Wikimedia Commons et de la NASA, sous licences libres. " +
-                "Monuments 3D : maquettes simplifiées. Police Poppins (SIL Open Font License). Détails dans CREDITS.md.");
+                "Monuments 3D : maquettes modélisées dans Blender pour ce projet. Police Poppins (SIL Open Font License). Détails dans CREDITS.md.");
         }
 
         private void ShowModal(string title, string body, params (string label, Action action, bool primary)[] actions)

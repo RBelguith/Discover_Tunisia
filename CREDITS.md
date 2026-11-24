@@ -48,10 +48,13 @@ SIL Open Font License 1.1. Le texte de la licence est dans
 
 ## Modèles 3D, icônes et cible
 
-- Les monuments, l'avatar, le globe et ses repères sont des maquettes
-  construites à partir de formes simples par l'outil d'édition du projet
-  (menu Discover Tunisia > Rebuild Placeholder Models), sans modèle tiers. Le
-  même outil génère les textures des repères et du ciel étoilé.
+- Les sept monuments sont des maquettes modélisées pour le projet d'après les
+  photos ci-dessus, par le script `Tools/Blender/monuments.py` (Blender 5.3),
+  sans modèle tiers.
+- L'avatar, le globe et ses repères sont des maquettes construites à partir de
+  formes simples par l'outil d'édition du projet (menu Discover Tunisia >
+  Rebuild Placeholder Models). Le même outil génère les textures des repères et
+  du ciel étoilé.
 - Les icônes SVG de `Assets/DiscoverTunisia/UI/Icons/` ont été dessinées pour
   le projet.
 - La cible `Assets/DiscoverTunisia/AR/Targets/CIBLE_AR.png` est un motif à fort
@@ -60,6 +63,7 @@ SIL Open Font License 1.1. Le texte de la licence est dans
 ## Logiciels
 
 - URP, UI Toolkit et Input System : Unity Technologies.
+- Blender 5.3 : Blender Foundation, pour les modèles des monuments.
 - Vuforia Engine 11.4.4 : PTC. Le paquet n'est pas inclus dans le dépôt et
   demande une clé de licence propre (voir `README.md`).
 

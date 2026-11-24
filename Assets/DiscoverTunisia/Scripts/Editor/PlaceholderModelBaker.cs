@@ -18,22 +18,11 @@ namespace DiscoverTunisia.EditorTools
         private const string Textures = Art + "/Textures";
         private const float GlobeRadius = 3f;
 
-        public static readonly Dictionary<PlaceholderStyle, string> MonumentNames = new Dictionary<PlaceholderStyle, string>
-        {
-            { PlaceholderStyle.MinaretDome, "Monument_GreatMosque" },
-            { PlaceholderStyle.SculptedFacade, "Monument_SculptedFacade" },
-            { PlaceholderStyle.MausoléeDome, "Monument_Mausoleum" },
-            { PlaceholderStyle.RuinsColumns, "Monument_Ruins" },
-            { PlaceholderStyle.MedinaSouk, "Monument_Medina" },
-            { PlaceholderStyle.FortPort, "Monument_OldPort" },
-        };
-
         [MenuItem("Discover Tunisia/Rebuild Placeholder Models")]
         public static void RebuildAll()
         {
             EnsureFolders();
             Palette.ClearCache();
-            foreach (var style in MonumentNames.Keys) BakeMonument(style);
             BakeAvatar();
             BakePlinth();
             BakeMarker();
@@ -41,8 +30,6 @@ namespace DiscoverTunisia.EditorTools
             BakeBackdrop();
             AssetDatabase.SaveAssets();
         }
-
-        public static string MonumentPath(PlaceholderStyle style) => Prefabs + "/" + MonumentNames[style] + ".prefab";
 
         private static void EnsureFolders()
         {
@@ -54,14 +41,6 @@ namespace DiscoverTunisia.EditorTools
         }
 
         // Models
-
-        private static void BakeMonument(PlaceholderStyle style)
-        {
-            var go = PlaceholderMonuments.Build(style, null, null);
-            go.name = MonumentNames[style];
-            Flatten(go);
-            Save(go, MonumentPath(style));
-        }
 
         private static void BakeAvatar()
         {

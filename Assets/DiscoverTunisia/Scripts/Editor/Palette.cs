@@ -7,8 +7,6 @@ using Object = UnityEngine.Object;
 
 namespace DiscoverTunisia.EditorTools.Placeholders
 {
-    public enum PlaceholderStyle { Generic, MinaretDome, SculptedFacade, MausoléeDome, RuinsColumns, MedinaSouk, FortPort }
-
     /// <summary>Material assets for the placeholder models: one asset per color, created on first use.</summary>
     public static class Palette
     {

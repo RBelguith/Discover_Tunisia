@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DiscoverTunisia.World
 {
-    /// <summary>Sizes a model by its footprint so any prefab, placeholder or real, sits the same way on a stand or a target.</summary>
+    /// <summary>Sizes a model by its footprint so any monument prefab sits the same way on a stand or a target.</summary>
     public static class ModelFitter
     {
         /// <summary>Bounds at unit scale. Measure a fresh, active instance: inactive renderers report empty bounds.</summary>
