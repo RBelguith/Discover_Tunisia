@@ -18,7 +18,7 @@ Terre est `Assets/DiscoverTunisia/Art/Textures/Earth.jpg`.
 
 | Fichier local | Fichier d'origine (Wikimedia Commons) |
 |---|---|
-| `Earth.jpg` | *Whole world - land and oceans 12000.jpg* (NASA, domaine public) |
+| `Earth.jpg` | *Whole world - land and oceans 12000.jpg* (NASA, domaine public), océans recolorés pour le projet |
 | `nabeul_neapolis.jpg` | *New Neapolis ruins, Feb, 2026, ZVE08405.jpg* |
 | `nabeul_medina.jpg` | *Nabeul Souk R01.jpg* |
 | `nabeul_food.jpg` | *Poupées de sucre de Nabeul 01.jpg* |
@@ -48,13 +48,12 @@ SIL Open Font License 1.1. Le texte de la licence est dans
 
 ## Modèles 3D, icônes et cible
 
-- Les sept monuments sont des maquettes modélisées pour le projet d'après les
-  photos ci-dessus, par le script `Tools/Blender/monuments.py` (Blender 5.3),
-  sans modèle tiers.
-- L'avatar, le globe et ses repères sont des maquettes construites à partir de
-  formes simples par l'outil d'édition du projet (menu Discover Tunisia >
-  Rebuild Placeholder Models). Le même outil génère les textures des repères et
-  du ciel étoilé.
+- Les sept monuments, l'avatar, les repères du globe et les socles sont des
+  maquettes modélisées pour le projet par le script `Tools/Blender/models.py`
+  (Blender 5.3), sans modèle tiers. Les monuments suivent les photos
+  ci-dessus.
+- La carte de brillance des océans (`EarthGloss.png`), le shader de
+  l'atmosphère et le ciel étoilé ont été créés pour le projet.
 - Les icônes SVG de `Assets/DiscoverTunisia/UI/Icons/` ont été dessinées pour
   le projet.
 - La cible `Assets/DiscoverTunisia/AR/Targets/CIBLE_AR.png` est un motif à fort
@@ -63,7 +62,7 @@ SIL Open Font License 1.1. Le texte de la licence est dans
 ## Logiciels
 
 - URP, UI Toolkit et Input System : Unity Technologies.
-- Blender 5.3 : Blender Foundation, pour les modèles des monuments.
+- Blender 5.3 : Blender Foundation, pour les modèles 3D.
 - Vuforia Engine 11.4.4 : PTC. Le paquet n'est pas inclus dans le dépôt et
   demande une clé de licence propre (voir `README.md`).
 

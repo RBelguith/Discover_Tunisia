@@ -2,63 +2,65 @@ using UnityEngine;
 
 namespace DiscoverTunisia.World
 {
-    /// <summary>A governorate marker on the globe: halo, dot and, when selected, a pulsing pin.</summary>
+    /// <summary>A governorate marker on the globe: a bead, or a pin with a ring that pings outward when it is the chosen one.</summary>
     public sealed class MarkerView : MonoBehaviour
     {
+        private const string TintedMaterial = "M_Pin";
         private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
+        private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 
-        [SerializeField] private Renderer glow;
-        [SerializeField] private Renderer dot;
-        [SerializeField] private Renderer pinHead;
+        [SerializeField] private Renderer bead;
+        [SerializeField] private Renderer pinBody;
         [SerializeField] private GameObject pin;
-        [SerializeField] private float pulseSpeed = 3.5f;
+        [SerializeField] private Transform head;
+        [SerializeField] private Renderer ring;
+        [SerializeField] private float pingsPerSecond = 0.7f;
+        [SerializeField] private float ringGrowth = 2.6f;
+        [SerializeField, Range(0f, 1f)] private float glow = 0.35f;
 
         private MaterialPropertyBlock _block;
         private Color _accent;
         private bool _selected;
-        private Vector3 _glowScale;
-        private Vector3 _baseGlowScale;
+        private Vector3 _ringScale;
 
-        public Transform Anchor => pinHead != null && _selected ? pinHead.transform : transform;
+        public Transform Anchor => _selected && head != null ? head : transform;
 
         public void Setup(Color accent, bool selected)
         {
             _block ??= new MaterialPropertyBlock();
+            if (_ringScale == Vector3.zero) _ringScale = ring.transform.localScale;
             _accent = accent;
             _selected = selected;
-            if (_baseGlowScale == Vector3.zero) _baseGlowScale = glow.transform.localScale;
-            _glowScale = _baseGlowScale * (selected ? 1.5f : 1f);
-            glow.transform.localScale = _glowScale;
+            bead.gameObject.SetActive(!selected);
             pin.SetActive(selected);
-            SetColor(glow, accent * (selected ? 1f : 0.55f));
-            SetColor(dot, selected ? Color.white : accent);
-            SetColor(pinHead, accent);
+            ring.gameObject.SetActive(selected);
+            Tint(selected ? pinBody : bead, accent);
         }
 
-        private void SetColor(Renderer r, Color c)
+        private void Tint(Renderer target, Color color)
         {
-            _block.SetColor(BaseColor, c);
-            r.SetPropertyBlock(_block);
+            var materials = target.sharedMaterials;
+            for (int i = 0; i < materials.Length; i++)
+            {
+                if (materials[i] == null || materials[i].name != TintedMaterial) continue;
+                target.GetPropertyBlock(_block, i);
+                _block.SetColor(BaseColor, color);
+                _block.SetColor(EmissionColor, color * glow);
+                target.SetPropertyBlock(_block, i);
+            }
         }
 
         private void Update()
         {
             if (!_selected) return;
-            float wave = Mathf.Sin(Time.time * pulseSpeed);
-            glow.transform.localScale = _glowScale * (1f + 0.22f * wave);
+            float t = Mathf.Repeat(Time.time * pingsPerSecond, 1f);
+            float spread = 1f - (1f - t) * (1f - t);
+            ring.transform.localScale = _ringScale * Mathf.Lerp(1f, ringGrowth, spread);
             var c = _accent;
-            c.a = 0.75f + 0.25f * wave;
-            SetColor(glow, c);
+            c.a = 0.9f * (1f - t);
+            _block.Clear();
+            _block.SetColor(BaseColor, c);
+            ring.SetPropertyBlock(_block);
         }
-
-#if UNITY_EDITOR
-        public void EditorSetup(Renderer glow, Renderer dot, Renderer pinHead, GameObject pin)
-        {
-            this.glow = glow;
-            this.dot = dot;
-            this.pinHead = pinHead;
-            this.pin = pin;
-        }
-#endif
     }
 }

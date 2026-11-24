@@ -49,7 +49,7 @@ namespace DiscoverTunisia.Tests
             {
                 var meshes = m.Model.GetComponentsInChildren<MeshFilter>(true).Select(f => AssetDatabase.GetAssetPath(f.sharedMesh)).ToList();
                 Assert.That(meshes, Is.Not.Empty, m.Title + " has no mesh");
-                Assert.That(meshes, Has.All.StartsWith(ModelsFolder).And.All.EndsWith(".fbx"), m.Title + " should use a model exported by Tools/Blender/monuments.py");
+                Assert.That(meshes, Has.All.StartsWith(ModelsFolder).And.All.EndsWith(".fbx"), m.Title + " should use a model exported by Tools/Blender/models.py");
             }
         }
 

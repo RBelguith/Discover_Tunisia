@@ -3,37 +3,35 @@ using UnityEngine;
 namespace DiscoverTunisia.World
 {
     /// <summary>Colors the avatar's outfit with a governorate accent color, without new materials.</summary>
-    [RequireComponent(typeof(Renderer))]
     public sealed class OutfitTint : MonoBehaviour
     {
+        private const string OutfitMaterial = "M_Outfit";
+        private const string OutfitDarkMaterial = "M_OutfitDark";
         private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
 
-        [SerializeField] private int outfitMaterialIndex = -1;
-        [SerializeField] private int outfitDarkMaterialIndex = -1;
         [SerializeField, Range(0f, 1f)] private float darkShade = 0.35f;
 
         public void Apply(Color accent)
         {
-            var target = GetComponent<Renderer>();
+            var dark = Color.Lerp(accent, Color.black, darkShade);
             var block = new MaterialPropertyBlock();
-            if (outfitMaterialIndex >= 0)
+            foreach (var target in GetComponentsInChildren<Renderer>(true))
             {
-                block.SetColor(BaseColor, accent);
-                target.SetPropertyBlock(block, outfitMaterialIndex);
-            }
-            if (outfitDarkMaterialIndex >= 0)
-            {
-                block.SetColor(BaseColor, Color.Lerp(accent, Color.black, darkShade));
-                target.SetPropertyBlock(block, outfitDarkMaterialIndex);
+                var materials = target.sharedMaterials;
+                for (int i = 0; i < materials.Length; i++)
+                {
+                    if (materials[i] == null) continue;
+                    if (materials[i].name == OutfitMaterial) Tint(target, i, accent, block);
+                    else if (materials[i].name == OutfitDarkMaterial) Tint(target, i, dark, block);
+                }
             }
         }
 
-#if UNITY_EDITOR
-        public void EditorSetup(int outfitIndex, int outfitDarkIndex)
+        private static void Tint(Renderer target, int slot, Color color, MaterialPropertyBlock block)
         {
-            outfitMaterialIndex = outfitIndex;
-            outfitDarkMaterialIndex = outfitDarkIndex;
+            target.GetPropertyBlock(block, slot);
+            block.SetColor(BaseColor, color);
+            target.SetPropertyBlock(block, slot);
         }
-#endif
     }
 }

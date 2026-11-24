@@ -1,5 +1,5 @@
-# Builds the Discover Tunisia monument models and exports one FBX per monument for Unity.
-# Usage: blender --background --python Tools/Blender/monuments.py -- --out Assets/DiscoverTunisia/Art/Models [Name ...]
+# Builds the Discover Tunisia 3D models (monuments, avatar, markers, pedestal) and exports one FBX each for Unity.
+# Usage: blender --background --python Tools/Blender/models.py -- --out Assets/DiscoverTunisia/Art/Models [Name ...]
 
 import math
 import os
@@ -16,7 +16,6 @@ PALETTE = {
     "M_Stone": (0.86, 0.80, 0.66),
     "M_StoneDark": (0.66, 0.58, 0.45),
     "M_Sandstone": (0.80, 0.62, 0.40),
-    "M_Brick": (0.78, 0.55, 0.38),
     "M_Whitewash": (0.92, 0.92, 0.90),
     "M_Tile": (0.20, 0.55, 0.80),
     "M_TileGreen": (0.18, 0.52, 0.42),
@@ -27,10 +26,20 @@ PALETTE = {
     "M_Wood": (0.25, 0.16, 0.10),
     "M_Water": (0.10, 0.35, 0.55),
     "M_Hull": (0.85, 0.85, 0.80),
-    "M_Sail": (1.00, 1.00, 1.00),
     "M_Mast": (0.50, 0.40, 0.30),
     "M_Gold": (1.00, 0.80, 0.30),
     "M_Foliage": (0.22, 0.34, 0.20),
+    "M_Skin": (0.94, 0.78, 0.62),
+    "M_Hair": (0.16, 0.10, 0.07),
+    "M_Outfit": (1.00, 0.55, 0.20),
+    "M_OutfitDark": (0.65, 0.36, 0.13),
+    "M_Jewel": (1.00, 0.82, 0.35),
+    "M_Chechia": (0.72, 0.12, 0.15),
+    "M_Plinth": (0.10, 0.18, 0.30),
+    "M_Stage": (0.10, 0.20, 0.34),
+    "M_PlinthHalo": (0.31, 0.76, 0.97),
+    "M_Pin": (1.00, 1.00, 1.00),
+    "M_MarkerRing": (1.00, 1.00, 1.00),
 }
 
 BEVEL = 0.012
@@ -199,6 +208,98 @@ class Builder:
         for z, r, h in ((0.06, 1.0, 0.55), (0.32, 0.8, 0.5), (0.58, 0.55, 0.42)):
             p = Vector(loc) + Vector((0, 0, trunk + height * z))
             self.cone(radius * r, height * h, p, "M_Foliage", segments=8)
+
+    def lathe(self, profile, loc, mat, segments=24, rot=0.0, caps=True):
+        """Surface of revolution around local Z from (z, radius) pairs, capped where the radius is not zero."""
+        bm = bmesh.new()
+        rings = []
+        for z, r in profile:
+            if r <= 1e-6:
+                rings.append([bm.verts.new((0.0, 0.0, z))])
+                continue
+            rings.append([bm.verts.new((math.cos(2 * math.pi * i / segments) * r, math.sin(2 * math.pi * i / segments) * r, z))
+                          for i in range(segments)])
+        for r0, r1 in zip(rings, rings[1:]):
+            for i in range(segments):
+                j = (i + 1) % segments
+                if len(r0) == 1:
+                    bm.faces.new((r0[0], r1[i], r1[j]))
+                elif len(r1) == 1:
+                    bm.faces.new((r0[i], r0[j], r1[0]))
+                else:
+                    bm.faces.new((r0[i], r0[j], r1[j], r1[i]))
+        for ring in (rings[0], rings[-1]) if caps else ():
+            if len(ring) > 1:
+                bm.faces.new(ring)
+        bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+        return self._add(bm, mat, loc, rot)
+
+    def ellipsoid(self, radii, loc, mat, rot=0.0, segments=20, rings=10, keep=None, cut=None):
+        """Smooth ellipsoid, trimmed by a keep test on unit-sphere points or by a (point, normal) plane cut."""
+        bm = bmesh.new()
+        bmesh.ops.create_uvsphere(bm, u_segments=segments, v_segments=rings, radius=1.0)
+        if keep is not None:
+            bmesh.ops.delete(bm, geom=[v for v in bm.verts if not keep(v.co)], context="VERTS")
+        for v in bm.verts:
+            v.co = Vector((v.co.x * radii[0], v.co.y * radii[1], v.co.z * radii[2]))
+        if cut is not None:
+            bmesh.ops.bisect_plane(bm, geom=bm.verts[:] + bm.edges[:] + bm.faces[:],
+                                   plane_co=Vector(cut[0]), plane_no=Vector(cut[1]).normalized(), clear_inner=True)
+        return self._add(bm, mat, loc, rot)
+
+    def torus(self, radius, tube, loc, mat, rot=0.0, segments=28, sides=6):
+        """Ring around local Z."""
+        bm = bmesh.new()
+        grid = []
+        for i in range(segments):
+            a = 2 * math.pi * i / segments
+            ring = []
+            for k in range(sides):
+                t = 2 * math.pi * k / sides
+                d = radius + math.cos(t) * tube
+                ring.append(bm.verts.new((math.cos(a) * d, math.sin(a) * d, math.sin(t) * tube)))
+            grid.append(ring)
+        for i in range(segments):
+            for k in range(sides):
+                a, b2 = grid[i], grid[(i + 1) % segments]
+                bm.faces.new((a[k], b2[k], b2[(k + 1) % sides], a[(k + 1) % sides]))
+        bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+        return self._add(bm, mat, loc, rot)
+
+    def limb(self, start, end, r0, r1, mat, segments=14):
+        """Tapered tube from start to end, for sleeves and arms."""
+        start, end = Vector(start), Vector(end)
+        axis = end - start
+        bm = bmesh.new()
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=segments, radius1=r0, radius2=r1,
+                              depth=axis.length, matrix=Matrix.Translation((0, 0, axis.length / 2)))
+        euler = Vector((0, 0, 1)).rotation_difference(axis.normalized()).to_euler()
+        return self._add(bm, mat, start, tuple(math.degrees(a) for a in euler))
+
+    def surface_band(self, profile, z0, z1, half_angle, mat, lift=0.004, steps=14):
+        """Strip laid on the front (-Y) of a lathe surface, between two heights."""
+        def radius_at(z):
+            for (za, ra), (zb, rb) in zip(profile, profile[1:]):
+                if za <= z <= zb:
+                    return ra + (rb - ra) * (z - za) / (zb - za)
+            return profile[-1][1]
+        bm = bmesh.new()
+        rows = []
+        for s in range(steps + 1):
+            z = z0 + (z1 - z0) * s / steps
+            r = radius_at(z) + lift
+            row = []
+            for a in (-half_angle, 0.0, half_angle):
+                row.append(bm.verts.new((math.sin(a) * r, -math.cos(a) * r, z)))
+            rows.append(row)
+        for r0, r1 in zip(rows, rows[1:]):
+            for k in range(2):
+                bm.faces.new((r0[k], r0[k + 1], r1[k + 1], r1[k]))
+        bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+        for f in bm.faces:
+            if f.normal.y > 0:
+                f.normal_flip()
+        return self._add(bm, mat, (0, 0, 0), 0.0)
 
     def jar(self, radius, height, loc, mat, rot=0.0):
         """Pottery jar: a lathe profile with a neck."""
@@ -676,6 +777,82 @@ def utique(b):
         b.cypress(h, (x, y, z))
 
 
+# --- people, markers and stands --------------------------------------------
+
+CAFTAN = [(0.0, 0.40), (0.05, 0.405), (0.45, 0.33), (0.9, 0.225), (1.02, 0.165), (1.24, 0.19), (1.40, 0.18), (1.47, 0.13), (1.52, 0.055)]
+
+
+def avatar(b):
+    """Woman in a Tunisian caftan with wide sleeves, gold embroidery and jewelry, hands clasped in front."""
+    skin, gold = "M_Skin", "M_Gold"
+    b.lathe(CAFTAN, (0, 0, 0), "M_Outfit", segments=28)
+    # embroidery: hem bands, the chest panel and the band down the skirt
+    for z, lift in ((0.07, 0.006), (0.15, 0.006)):
+        radius = 0.405 - (0.405 - 0.33) * (z - 0.05) / 0.40
+        b.torus(radius + lift, 0.011, (0, 0, z), gold, segments=32, sides=5)
+    b.surface_band(CAFTAN, 1.06, 1.42, 0.42, gold, lift=0.009)
+    b.surface_band(CAFTAN, 0.08, 1.0, 0.09, gold)
+    for k in range(5):
+        z = 1.12 + k * 0.065
+        r = 0.168 + (0.19 - 0.165) * (z - 1.02) / 0.22 if z < 1.24 else 0.19 - (0.19 - 0.18) * (z - 1.24) / 0.16
+        b.ellipsoid((0.012, 0.008, 0.012), (0, -r - 0.012, z), "M_Jewel", segments=8, rings=4)
+    b.cylinder(0.175, 0.07, (0, 0, 0.99), gold, segments=28)
+    # wide sleeves with gold cuffs, hands meeting in front of the belt
+    for side in (-1, 1):
+        shoulder = Vector((side * 0.15, 0.0, 1.40))
+        wrist = Vector((side * 0.055, -0.20, 1.06))
+        b.ellipsoid((0.075, 0.075, 0.075), shoulder, "M_OutfitDark", segments=14, rings=7)
+        b.limb(shoulder, wrist, 0.062, 0.098, "M_OutfitDark", segments=16)
+        cuff = shoulder + (wrist - shoulder) * 0.96
+        b.limb(cuff, wrist + (wrist - shoulder).normalized() * 0.012, 0.1, 0.102, gold, segments=16)
+    b.ellipsoid((0.042, 0.034, 0.058), (-0.022, -0.238, 1.035), skin, rot=(10, 0, 20), segments=12, rings=6)
+    b.ellipsoid((0.042, 0.034, 0.058), (0.026, -0.245, 1.045), skin, rot=(10, 0, -25), segments=12, rings=6)
+    # neck, head, hair and bun
+    b.cylinder(0.046, 0.1, (0, 0, 1.47), skin, segments=14)
+    b.ellipsoid((0.115, 0.118, 0.138), (0, 0.0, 1.68), skin, segments=24, rings=12)
+    # hair pulled back: the hairline runs from the forehead down behind the ears to the nape
+    b.ellipsoid((0.123, 0.126, 0.146), (0, 0.012, 1.703), "M_Hair", segments=40, rings=20,
+                cut=((0, -0.132, 0.047), (0, 0.13, 0.12)))
+    b.ellipsoid((0.062, 0.055, 0.062), (0, 0.128, 1.765), "M_Hair", segments=14, rings=7)
+    for side in (-1, 1):
+        b.ellipsoid((0.012, 0.006, 0.017), (side * 0.042, -0.115, 1.69), "M_Hair", segments=8, rings=4)
+        b.ellipsoid((0.022, 0.005, 0.005), (side * 0.043, -0.113, 1.716), "M_Hair", rot=(0, side * 8, 0), segments=8, rings=4)
+        b.ellipsoid((0.012, 0.012, 0.012), (side * 0.113, 0.0, 1.63), "M_Jewel", segments=8, rings=4)
+        b.ellipsoid((0.009, 0.009, 0.013), (side * 0.113, 0.0, 1.6), "M_Jewel", segments=8, rings=4)
+    b.ellipsoid((0.017, 0.005, 0.0045), (0, -0.097, 1.598), "M_Chechia", segments=10, rings=5)
+    # headband on the hairline, necklace and pendant, red slippers under the hem
+    b.torus(0.117, 0.007, (0, 0.012, 1.762), gold, rot=(8, 0, 0), segments=32, sides=5)
+    b.torus(0.072, 0.008, (0, -0.005, 1.5), gold, rot=(-14, 0, 0), segments=24, sides=5)
+    b.ellipsoid((0.018, 0.009, 0.022), (0, -0.088, 1.462), "M_Jewel", segments=10, rings=5)
+    for side in (-1, 1):
+        b.ellipsoid((0.05, 0.08, 0.028), (side * 0.09, -0.39, 0.02), "M_Chechia", segments=12, rings=6)
+
+
+def marker_pin(b):
+    """Map pin pointing up from its tip at the origin, with a white core in its head."""
+    b.lathe([(0.0, 0.0), (0.06, 0.02), (0.14, 0.045), (0.22, 0.07), (0.27, 0.087), (0.30, 0.09),
+             (0.33, 0.085), (0.36, 0.07), (0.383, 0.045), (0.39, 0.0)], (0, 0, 0), "M_Pin", segments=24)
+    b.ellipsoid((0.042, 0.042, 0.042), (0, 0, 0.36), "M_Whitewash", segments=14, rings=7)
+
+
+def marker_bead(b):
+    """Small rounded bead that marks a governorate on the globe."""
+    b.ellipsoid((0.05, 0.05, 0.028), (0, 0, 0.012), "M_Pin", segments=18, rings=8)
+
+
+def marker_ring(b):
+    """Flat ring of radius 1 that pulses around the selected marker."""
+    b.lathe([(0.0, 0.82), (0.0, 1.0)], (0, 0, 0.002), "M_MarkerRing", segments=48, caps=False)
+
+
+def pedestal(b):
+    """Display stand: a chamfered disc with a lighter top and a glowing rim. Its top is at z = 0.05."""
+    b.lathe([(-0.16, 0.0), (-0.16, 1.1), (-0.14, 1.15), (-0.02, 1.2), (0.03, 1.2), (0.05, 1.17), (0.05, 0.0)],
+            (0, 0, 0), "M_Plinth", segments=48)
+    b.cylinder(1.07, 0.004, (0, 0, 0.05), "M_Stage", segments=48)
+    b.torus(1.185, 0.014, (0, 0, 0.04), "M_PlinthHalo", segments=64, sides=6)
+
+
 MONUMENTS = {
     "Monument_GreatMosque": great_mosque,
     "Monument_ThreeDoors": three_doors,
@@ -684,6 +861,15 @@ MONUMENTS = {
     "Monument_Neapolis": neapolis,
     "Monument_OldPort": old_port,
     "Monument_Utique": utique,
+}
+
+MODELS = {
+    **MONUMENTS,
+    "Avatar": avatar,
+    "Marker_Pin": marker_pin,
+    "Marker_Bead": marker_bead,
+    "Marker_Ring": marker_ring,
+    "Pedestal": pedestal,
 }
 
 
@@ -696,12 +882,12 @@ def clear_scene():
 
 
 def build(name):
-    """Builds one monument in the open scene and returns its object."""
+    """Builds one model in the open scene and returns its object."""
     existing = bpy.data.objects.get(name)
     if existing is not None:
         bpy.data.objects.remove(existing)
     b = Builder(name)
-    MONUMENTS[name](b)
+    MODELS[name](b)
     return b.finish()
 
 
@@ -737,12 +923,12 @@ def main(argv):
         i = args.index("--out")
         out_dir = args[i + 1]
         del args[i:i + 2]
-    names = args or list(MONUMENTS)
+    names = args or list(MODELS)
     clear_scene()
     for name in names:
         export(build(name), out_dir)
         clear_scene()
-    print("Exported", len(names), "monuments to", out_dir)
+    print("Exported", len(names), "models to", out_dir)
 
 
 if __name__ == "__main__" and bpy.app.background:

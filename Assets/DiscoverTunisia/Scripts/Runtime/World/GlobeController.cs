@@ -125,14 +125,5 @@ namespace DiscoverTunisia.World
         }
 
         private void Apply() => spin.localRotation = Quaternion.Euler(_pitch, 0f, 0f) * Quaternion.Euler(0f, _yaw, 0f);
-
-#if UNITY_EDITOR
-        public void EditorSetup(Transform spin, MarkerView markerPrefab, bool interactive)
-        {
-            this.spin = spin;
-            this.markerPrefab = markerPrefab;
-            this.interactive = interactive;
-        }
-#endif
     }
 }

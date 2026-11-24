@@ -2,7 +2,7 @@ using UnityEditor;
 
 namespace DiscoverTunisia.EditorTools
 {
-    /// <summary>Import rules for the monument models exported by Tools/Blender/monuments.py.</summary>
+    /// <summary>Import rules for the monument models exported by Tools/Blender/models.py.</summary>
     public sealed class MonumentModelImporter : AssetPostprocessor
     {
         public const string Folder = "Assets/DiscoverTunisia/Art/Models/";
