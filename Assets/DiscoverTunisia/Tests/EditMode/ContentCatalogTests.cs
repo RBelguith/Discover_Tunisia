@@ -16,7 +16,13 @@ namespace DiscoverTunisia.Tests
             return AssetDatabase.LoadAssetAtPath<ContentCatalog>(AssetDatabase.GUIDToAssetPath(guids[0]));
         }
 
-        private static IEnumerable<GovernorateData> Governorates() => LoadCatalog().Governorates;
+        private static IEnumerable<GovernorateData> Governorates() => LoadCatalog().Governorates.Where(g => g != null);
+
+        [Test]
+        public void Catalog_HasNoEmptySlots()
+        {
+            Assert.That(LoadCatalog().Governorates, Has.None.Null, "The ContentCatalog has an empty governorate slot");
+        }
 
         [Test]
         public void Catalog_HasUniqueIds()
