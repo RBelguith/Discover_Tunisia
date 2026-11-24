@@ -18,13 +18,20 @@ namespace DiscoverTunisia.AR
         private readonly Dictionary<ObserverBehaviour, string> _targets = new Dictionary<ObserverBehaviour, string>();
         private bool _started;
         private bool _timedOut;
+        private bool _subscribed;
 
         private void Awake()
         {
+            if (CameraDisabled)
+            {
+                Fail("La caméra est désactivée pour cette session.");
+                return;
+            }
             var app = VuforiaApplication.Instance;
             app.OnVuforiaInitialized += OnInitialized;
             app.OnVuforiaStarted += OnStarted;
             app.OnVuforiaError += OnError;
+            _subscribed = true;
             if (!LoadLicenseKey())
             {
                 Fail("La clé de licence Vuforia est absente. Voir le README, section Vuforia.");
@@ -69,6 +76,7 @@ namespace DiscoverTunisia.AR
 
         private void OnDestroy()
         {
+            if (!_subscribed) return;
             var app = VuforiaApplication.Instance;
             app.OnVuforiaInitialized -= OnInitialized;
             app.OnVuforiaStarted -= OnStarted;

@@ -10,6 +10,12 @@ namespace DiscoverTunisia.Tracking
     /// <summary>Camera image tracking provided by an AR SDK. Screens fall back to a 3D preview when it is missing or fails.</summary>
     public abstract class ImageTracker : MonoBehaviour
     {
+        /// <summary>Set before a tracking scene loads to keep the camera off. Trackers then fail at once and screens show their fallback.</summary>
+        public static bool CameraDisabled { get; set; }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetOnPlay() => CameraDisabled = false;
+
         public TrackerState State { get; private set; } = TrackerState.Starting;
 
         /// <summary>Why tracking failed, written for the visitor.</summary>
