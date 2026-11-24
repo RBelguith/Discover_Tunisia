@@ -66,7 +66,11 @@ namespace DiscoverTunisia.Screens
         private void OnTrackerState(TrackerState state)
         {
             if (state == TrackerState.Failed) EnterPreview("Aperçu 3D : " + tracker.FailureMessage);
-            else RefreshStatus();
+            else
+            {
+                if (_preview) ExitPreview();
+                RefreshStatus();
+            }
         }
 
         private void OnTarget(string id, Transform anchor, TrackingQuality quality)
@@ -84,6 +88,14 @@ namespace DiscoverTunisia.Screens
             if (previewRig != null) previewRig.SetActive(true);
             _status.text = message;
             _statusPill.AddToClassList("status-pill--preview");
+            Place();
+        }
+
+        private void ExitPreview()
+        {
+            _preview = false;
+            if (previewRig != null) previewRig.SetActive(false);
+            _statusPill.RemoveFromClassList("status-pill--preview");
             Place();
         }
 

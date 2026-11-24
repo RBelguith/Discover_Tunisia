@@ -54,7 +54,7 @@ namespace DiscoverTunisia.Screens
             switch (state)
             {
                 case TrackerState.Starting: _status.text = "Démarrage de la caméra..."; break;
-                case TrackerState.Running: _status.text = "Placez une carte région dans le cadre"; break;
+                case TrackerState.Running: HideFailure(); _status.text = "Placez une carte région dans le cadre"; break;
                 case TrackerState.Failed: ShowFailure(tracker.FailureMessage); break;
             }
         }
@@ -88,9 +88,16 @@ namespace DiscoverTunisia.Screens
 
         private void ShowFailure(string message)
         {
+            Retry();
             _failure.Q<Label>("failureText").text = message;
             _failure.RemoveFromClassList("hidden");
             _reticle.AddToClassList("hidden");
+        }
+
+        private void HideFailure()
+        {
+            _failure.AddToClassList("hidden");
+            _reticle.EnableInClassList("hidden", _found != null);
         }
 
         protected override void OnBack() => Navigator.Go(AppScreen.Identification);

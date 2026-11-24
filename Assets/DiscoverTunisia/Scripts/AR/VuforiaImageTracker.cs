@@ -17,6 +17,7 @@ namespace DiscoverTunisia.AR
         private readonly List<(string id, Texture2D image, float width)> _pending = new List<(string, Texture2D, float)>();
         private readonly Dictionary<ObserverBehaviour, string> _targets = new Dictionary<ObserverBehaviour, string>();
         private bool _started;
+        private bool _timedOut;
 
         private void Awake()
         {
@@ -26,7 +27,7 @@ namespace DiscoverTunisia.AR
             app.OnVuforiaError += OnError;
             if (!LoadLicenseKey())
             {
-                SetState(TrackerState.Failed, "La clé de licence Vuforia est absente. Voir le README, section Vuforia.");
+                Fail("La clé de licence Vuforia est absente. Voir le README, section Vuforia.");
                 return;
             }
             if (!app.IsInitialized) app.Initialize();
@@ -52,10 +53,18 @@ namespace DiscoverTunisia.AR
 
         private void Start() => Invoke(nameof(GiveUpIfStillStarting), startTimeout);
 
+        /// <summary>A soft failure: OnStarted still recovers from it, for example after a slow camera permission prompt.</summary>
         private void GiveUpIfStillStarting()
         {
-            if (State == TrackerState.Starting)
-                SetState(TrackerState.Failed, "Vuforia n'a pas démarré. Dans l'éditeur, acceptez l'accord via Help > Vuforia Engine > Show Developer Agreement, puis vérifiez la webcam.");
+            if (State != TrackerState.Starting) return;
+            _timedOut = true;
+            SetState(TrackerState.Failed, "Vuforia n'a pas démarré. Dans l'éditeur, acceptez l'accord via Help > Vuforia Engine > Show Developer Agreement, puis vérifiez la webcam.");
+        }
+
+        private void Fail(string message)
+        {
+            _timedOut = false;
+            SetState(TrackerState.Failed, message);
         }
 
         private void OnDestroy()
@@ -76,7 +85,7 @@ namespace DiscoverTunisia.AR
 
         private void OnInitialized(VuforiaInitError error)
         {
-            if (error != VuforiaInitError.NONE) SetState(TrackerState.Failed, Describe(error));
+            if (error != VuforiaInitError.NONE) Fail(Describe(error));
         }
 
         private void OnStarted()
@@ -85,11 +94,13 @@ namespace DiscoverTunisia.AR
             _started = true;
             foreach (var (id, image, width) in _pending) Create(id, image, width);
             _pending.Clear();
-            if (State != TrackerState.Failed) SetState(TrackerState.Running);
+            if (State != TrackerState.Starting && !_timedOut) return;
+            _timedOut = false;
+            SetState(TrackerState.Running);
         }
 
         private void OnError(VuforiaEngineError error) =>
-            SetState(TrackerState.Failed, error == VuforiaEngineError.CAMERA_DEVICE_LOST
+            Fail(error == VuforiaEngineError.CAMERA_DEVICE_LOST
                 ? "La caméra a été coupée. Revenez en arrière puis relancez le scan."
                 : "Vuforia a signalé une erreur : " + error + ".");
 
@@ -104,7 +115,7 @@ namespace DiscoverTunisia.AR
             catch (Exception e)
             {
                 Debug.LogException(e);
-                SetState(TrackerState.Failed, "Impossible de préparer l'image \"" + id + "\" pour le suivi.");
+                Fail("Impossible de préparer l'image \"" + id + "\" pour le suivi.");
             }
         }
 
