@@ -9,6 +9,8 @@ namespace DiscoverTunisia.Tests
 {
     public class ContentCatalogTests
     {
+        private const string ModelsFolder = "Assets/DiscoverTunisia/Art/Models/";
+
         private static ContentCatalog LoadCatalog()
         {
             var guids = AssetDatabase.FindAssets("t:" + nameof(ContentCatalog));
@@ -31,6 +33,24 @@ namespace DiscoverTunisia.Tests
             Assert.That(ids, Is.Not.Empty);
             Assert.That(ids, Has.None.Null.And.None.Empty);
             Assert.That(ids, Is.Unique);
+        }
+
+        [Test]
+        public void Catalog_GivesEveryMonumentItsOwnModel()
+        {
+            var models = Governorates().SelectMany(g => g.Monuments).Select(m => m.Model).ToList();
+            Assert.That(models, Is.Unique);
+        }
+
+        [TestCaseSource(nameof(Governorates))]
+        public void Governorate_MonumentsUseTheBlenderModels(GovernorateData g)
+        {
+            foreach (var m in g.Monuments)
+            {
+                var meshes = m.Model.GetComponentsInChildren<MeshFilter>(true).Select(f => AssetDatabase.GetAssetPath(f.sharedMesh)).ToList();
+                Assert.That(meshes, Is.Not.Empty, m.Title + " has no mesh");
+                Assert.That(meshes, Has.All.StartsWith(ModelsFolder).And.All.EndsWith(".fbx"), m.Title + " should use a model exported by Tools/Blender/monuments.py");
+            }
         }
 
         [TestCaseSource(nameof(Governorates))]

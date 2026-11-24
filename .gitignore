@@ -87,3 +87,6 @@ crashlytics-build.properties
 
 # Vuforia runtime data written in Play Mode
 /QCAR/
+
+# Python bytecode from the Blender scripts
+__pycache__/

@@ -56,6 +56,17 @@ namespace DiscoverTunisia.Tests
                 }
         }
 
+        [UnityTest, TestCaseSource(nameof(Entries))]
+        public IEnumerator Monument_SpinsInPlace(string governorateId, int index)
+        {
+            yield return Show(governorateId, index);
+            var (_, model, _) = Shown(governorateId, index);
+            var local = BoundsIn(model.transform, model);
+            var size = Mathf.Max(local.size.x, local.size.z);
+            var offset = new Vector2(local.center.x, local.center.z).magnitude;
+            Assert.That(offset, Is.LessThanOrEqualTo(size * 0.02f), "The footprint should be centered on the pivot, or the turntable makes it orbit");
+        }
+
         private static IEnumerator Show(string governorateId, int index)
         {
             AppSession.Select(ScreenDriver.Catalog().Find(governorateId), SelectionSource.Manual);
