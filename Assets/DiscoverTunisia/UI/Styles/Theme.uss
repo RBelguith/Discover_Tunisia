@@ -162,6 +162,15 @@
     align-items: center;
 }
 
+.top-bar--camera .top-bar__title {
+    flex-grow: 0;
+    padding: 12px 40px;
+    border-radius: 48px;
+    border-width: 1px;
+    border-color: var(--c-line);
+    background-color: var(--c-panel);
+}
+
 .top-bar__spacer {
     width: 84px;
 }

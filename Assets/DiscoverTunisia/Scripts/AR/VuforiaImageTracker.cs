@@ -11,33 +11,58 @@ namespace DiscoverTunisia.AR
     {
         private const string LicenseResource = "VuforiaLicenseKey";
 
+        [SerializeField, Tooltip("Turn the camera on when the scene loads. Off: the screen calls StartCamera.")]
+        private bool startOnAwake = true;
         [SerializeField, Tooltip("Seconds to wait for the camera before showing the failure message.")]
         private float startTimeout = 10f;
 
         private readonly List<(string id, Texture2D image, float width)> _pending = new List<(string, Texture2D, float)>();
         private readonly Dictionary<ObserverBehaviour, string> _targets = new Dictionary<ObserverBehaviour, string>();
-        private bool _started;
+        private bool _targetsCreated;
         private bool _timedOut;
         private bool _subscribed;
 
         private void Awake()
         {
+            if (startOnAwake) StartCamera();
+            else SetState(TrackerState.Off);
+        }
+
+        public override void StartCamera()
+        {
+            if (State == TrackerState.Running) return;
             if (CameraDisabled)
             {
                 Fail("La caméra est désactivée pour cette session.");
                 return;
             }
             var app = VuforiaApplication.Instance;
-            app.OnVuforiaInitialized += OnInitialized;
-            app.OnVuforiaStarted += OnStarted;
-            app.OnVuforiaError += OnError;
-            _subscribed = true;
+            if (!_subscribed)
+            {
+                app.OnVuforiaInitialized += OnInitialized;
+                app.OnVuforiaStarted += OnStarted;
+                app.OnVuforiaError += OnError;
+                _subscribed = true;
+            }
             if (!LoadLicenseKey())
             {
                 Fail("La clé de licence Vuforia est absente. Voir le README, section Vuforia.");
                 return;
             }
+            _timedOut = false;
+            SetState(TrackerState.Starting);
+            CancelInvoke(nameof(GiveUpIfStillStarting));
+            Invoke(nameof(GiveUpIfStillStarting), startTimeout);
             if (!app.IsInitialized) app.Initialize();
+            else if (VuforiaBehaviour.Instance != null) VuforiaBehaviour.Instance.enabled = true;
+        }
+
+        public override void StopCamera()
+        {
+            CancelInvoke(nameof(GiveUpIfStillStarting));
+            if (VuforiaBehaviour.Instance != null) VuforiaBehaviour.Instance.enabled = false;
+            _timedOut = false;
+            SetState(TrackerState.Off);
         }
 
         /// <summary>Puts the key on the config only for this session, so saving the config asset never writes it to disk.</summary>
@@ -58,8 +83,6 @@ namespace DiscoverTunisia.AR
             VuforiaConfiguration.Instance.Vuforia.LicenseKey = "";
         }
 
-        private void Start() => Invoke(nameof(GiveUpIfStillStarting), startTimeout);
-
         /// <summary>A soft failure: OnStarted still recovers from it, for example after a slow camera permission prompt.</summary>
         private void GiveUpIfStillStarting()
         {
@@ -70,6 +93,7 @@ namespace DiscoverTunisia.AR
 
         private void Fail(string message)
         {
+            CancelInvoke(nameof(GiveUpIfStillStarting));
             _timedOut = false;
             SetState(TrackerState.Failed, message);
         }
@@ -87,7 +111,7 @@ namespace DiscoverTunisia.AR
 
         public override void AddTarget(string id, Texture2D image, float widthMeters)
         {
-            if (_started) Create(id, image, widthMeters);
+            if (_targetsCreated) Create(id, image, widthMeters);
             else _pending.Add((id, image, widthMeters));
         }
 
@@ -98,10 +122,18 @@ namespace DiscoverTunisia.AR
 
         private void OnStarted()
         {
-            if (_started || VuforiaBehaviour.Instance == null) return;
-            _started = true;
-            foreach (var (id, image, width) in _pending) Create(id, image, width);
-            _pending.Clear();
+            if (VuforiaBehaviour.Instance == null) return;
+            if (State == TrackerState.Off)
+            {
+                VuforiaBehaviour.Instance.enabled = false;
+                return;
+            }
+            if (!_targetsCreated)
+            {
+                _targetsCreated = true;
+                foreach (var (id, image, width) in _pending) Create(id, image, width);
+                _pending.Clear();
+            }
             if (State != TrackerState.Starting && !_timedOut) return;
             _timedOut = false;
             SetState(TrackerState.Running);

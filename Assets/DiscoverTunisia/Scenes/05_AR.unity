@@ -336,6 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f633d4fed5f6943c79f8efd80472baad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DiscoverTunisia.AR::DiscoverTunisia.AR.VuforiaImageTracker
+  startOnAwake: 0
   startTimeout: 10
 --- !u!114 &570197510
 MonoBehaviour:
@@ -505,6 +506,8 @@ MonoBehaviour:
   previewSpot: {fileID: 1451290246}
   previewFootprint: 2.4
   spinDegreesPerSecond: 22
+  dragDegreesPerPixel: 0.35
+  spinResumeDelay: 1.5
 --- !u!114 &810611839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -557,7 +560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5129614773691016561, guid: d2098657d24c445bd9c5d48fc997c085, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 5129614773691016561, guid: d2098657d24c445bd9c5d48fc997c085, type: 3}
       propertyPath: m_LocalPosition.y

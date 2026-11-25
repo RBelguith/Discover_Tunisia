@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DiscoverTunisia.Tracking
 {
-    public enum TrackerState { Starting, Running, Failed }
+    public enum TrackerState { Starting, Running, Failed, Off }
 
     public enum TrackingQuality { None, Limited, Tracked }
 
@@ -28,6 +28,12 @@ namespace DiscoverTunisia.Tracking
 
         /// <summary>Registers an image to track. Safe to call before the tracker is running.</summary>
         public abstract void AddTarget(string id, Texture2D image, float widthMeters);
+
+        /// <summary>Turns the camera on. Also retries after a failure.</summary>
+        public abstract void StartCamera();
+
+        /// <summary>Turns the camera off and moves to Off. Registered targets are kept for the next start.</summary>
+        public abstract void StopCamera();
 
         protected void SetState(TrackerState state, string failureMessage = null)
         {

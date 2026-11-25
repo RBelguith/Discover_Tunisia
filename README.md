@@ -8,7 +8,7 @@ A Unity app that presents three Tunisian governorates: Nabeul, Bizerte and Kairo
 
 - Home, region list, card scan, globe and AR screens
 - A printed region card in front of the webcam selects its governorate
-- Monuments stand on a printed target, or turn on a stage when the camera is off
+- Monuments turn on a stage, and stand on a printed target once the visitor turns the camera on
 - Texts, photos and 3D models live in assets you edit in the Inspector
 - Interface in French, built with UI Toolkit
 
@@ -39,7 +39,7 @@ Open `Assets/DiscoverTunisia/Scenes/01_Accueil.unity` and press Play.
 | `02_Identification` | Lists the governorates and opens the globe or the scan. |
 | `03_Scan` | Recognizes a region card with the webcam and opens its governorate on the globe. |
 | `04_Globe` | Shows the governorate on the globe with its monuments, food and clothes. |
-| `05_AR` | Places the governorate's monuments on the printed target. |
+| `05_AR` | Turns the governorate's monuments on a stage, and places them on the printed target once the camera is on. |
 
 Each scene also plays on its own, with Nabeul selected.
 
