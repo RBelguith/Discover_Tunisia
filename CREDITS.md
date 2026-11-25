@@ -36,10 +36,6 @@ Terre est `Assets/DiscoverTunisia/Art/Textures/Earth.jpg`.
 La licence exacte de chaque fichier est indiquée sur sa page Wikimedia Commons.
 Les vignettes ont été redimensionnées à 1400-2048 px lors du téléchargement.
 
-Les cartes de région à imprimer (`Assets/DiscoverTunisia/AR/ScanCards/`) sont
-trois de ces photos redimensionnées à 1024 px : `nabeul_neapolis.jpg`,
-`bizerte_port.jpg` et `kairouan_mosquee.jpg`.
-
 ## Police
 
 Poppins (Regular, SemiBold et Bold), The Poppins Project Authors, sous licence
@@ -69,4 +65,4 @@ SIL Open Font License 1.1. Le texte de la licence est dans
 ## Données personnelles
 
 L'application ne collecte aucune donnée personnelle. Le scan reconnaît une
-carte de région imprimée et n'enregistre pas les images de la caméra.
+carte d'identité et n'enregistre pas les images de la caméra.

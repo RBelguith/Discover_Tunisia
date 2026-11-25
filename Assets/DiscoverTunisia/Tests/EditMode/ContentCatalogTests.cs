@@ -69,12 +69,16 @@ namespace DiscoverTunisia.Tests
             Assert.That(g.Longitude, Is.InRange(7.5f, 11.7f));
         }
 
-        [TestCaseSource(nameof(Governorates))]
-        public void Governorate_ScanCardCanBeTracked(GovernorateData g)
+        [Test]
+        public void IdCards_MatchAGovernorateAndCanBeTracked()
         {
-            Assert.That(g.ScanCard, Is.Not.Null, g.DisplayName + " has no scan card");
-            Assert.That(g.ScanCard.isReadable, Is.True, "Vuforia copies the pixels, so the texture must be Read/Write enabled");
-            Assert.That(Mathf.Max(g.ScanCard.width, g.ScanCard.height), Is.LessThanOrEqualTo(2048), "Vuforia rejects images over 2048 px");
+            var catalog = LoadCatalog();
+            foreach (var card in Resources.LoadAll<Texture2D>(Screens.ScanScreen.IdCardsFolder))
+            {
+                Assert.That(catalog.Find(card.name.ToLowerInvariant()), Is.Not.Null, card.name + " is not named after a governorate id");
+                Assert.That(card.isReadable, Is.True, "Vuforia copies the pixels, so " + card.name + " must be Read/Write enabled");
+                Assert.That(Mathf.Max(card.width, card.height), Is.LessThanOrEqualTo(2048), "Vuforia rejects images over 2048 px");
+            }
         }
 
         [TestCaseSource(nameof(Governorates))]

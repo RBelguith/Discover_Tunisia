@@ -23,10 +23,6 @@ namespace DiscoverTunisia.Content
         [SerializeField] private CultureEntry[] foods = new CultureEntry[0];
         [SerializeField] private CultureEntry[] clothes = new CultureEntry[0];
 
-        [Header("Scan")]
-        [Tooltip("Photo printed on the region card. Vuforia tracks it, so it must be Read/Write enabled.")]
-        [SerializeField] private Texture2D scanCard;
-
         public string Id => id;
         public string DisplayName => displayName;
         public string Subtitle => subtitle;
@@ -38,7 +34,6 @@ namespace DiscoverTunisia.Content
         public IReadOnlyList<MonumentEntry> Monuments => monuments;
         public IReadOnlyList<CultureEntry> Foods => foods;
         public IReadOnlyList<CultureEntry> Clothes => clothes;
-        public Texture2D ScanCard => scanCard;
 
 #if UNITY_EDITOR
         public void EditorSetup(string id, string displayName, string subtitle, string description, string shortBlurb,

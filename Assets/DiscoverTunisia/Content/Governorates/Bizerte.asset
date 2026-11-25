@@ -37,4 +37,3 @@ MonoBehaviour:
   - title: Costume du nord et bijoux d'argent
     description: "Au nord comme ailleurs en Tunisie, la tenue traditionnelle feminine repose sur le caftan de soie et la fouta, pagne de coton ray\xE9 nou\xE9 \xE0 la taille, port\xE9s avec la ch\xE9chia. Les parures d'argent massif et les filets de corail compl\xE8tent la tenue des f\xEAtes, notamment le jour du mariage."
     image: {fileID: 21300000, guid: f21ea8171e7ff514faaa130ed121d4a8, type: 3}
-  scanCard: {fileID: 2800000, guid: f0b0edf4ea0b44a14b084a15ce382b63, type: 3}

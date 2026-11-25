@@ -15,10 +15,10 @@
         <ui:VisualElement class="ident__body" picking-mode="Ignore">
             <ui:VisualElement class="panel ident__card ident__card--scan">
                 <ui:VisualElement class="ident__badge">
-                    <ui:VisualElement class="icon icon--scan" />
+                    <ui:VisualElement class="icon icon--card" />
                 </ui:VisualElement>
-                <ui:Label text="Scanner une carte région" class="ident__card-title" />
-                <ui:Label text="Présentez une carte région imprimée devant la caméra. L'application reconnaît sa photo et ouvre le gouvernorat correspondant." class="ident__card-text" />
+                <ui:Label text="Scanner ma carte d'identité" class="ident__card-title" />
+                <ui:Label text="Présentez votre carte d'identité devant la caméra. L'application la reconnaît et ouvre votre gouvernorat. Aucune image n'est conservée." class="ident__card-text" />
                 <ui:VisualElement class="spacer" picking-mode="Ignore" />
                 <ui:Button name="scanButton" class="btn btn--primary">
                     <ui:VisualElement class="icon icon--scan" />

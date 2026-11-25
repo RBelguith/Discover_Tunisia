@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 namespace DiscoverTunisia.Screens
 {
-    /// <summary>Picks the governorate: by scanning a printed region card, or from the list.</summary>
+    /// <summary>Picks the governorate: by scanning an identity card, or from the list.</summary>
     public sealed class IdentificationScreen : ScreenController
     {
         [SerializeField] private VisualTreeAsset governorateRow;

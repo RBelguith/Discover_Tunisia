@@ -14,13 +14,13 @@
                 <ui:Label name="statusText" text="Démarrage de la caméra..." />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement class="top-bar" picking-mode="Ignore">
+        <ui:VisualElement class="top-bar top-bar--camera" picking-mode="Ignore">
             <ui:Button name="backButton" class="btn icon-btn">
                 <ui:VisualElement class="icon icon--close" />
             </ui:Button>
             <ui:VisualElement class="top-bar__title" picking-mode="Ignore">
-                <ui:Label text="SCAN D'UNE CARTE RÉGION" class="eyebrow" />
-                <ui:Label text="Présentez la photo à la caméra" class="screen-title" />
+                <ui:Label text="SCAN DE LA CARTE D'IDENTITÉ" class="eyebrow" />
+                <ui:Label text="Présentez votre carte à la caméra" class="screen-title" />
             </ui:VisualElement>
             <ui:VisualElement class="top-bar__spacer" picking-mode="Ignore" />
         </ui:VisualElement>
@@ -32,7 +32,7 @@
                     <ui:Label name="resultName" text="Kairouan" class="result__name" />
                 </ui:VisualElement>
                 <ui:Label name="resultSubtitle" text="Centre, ville sainte" class="sheet__text" />
-                <ui:Label text="Carte reconnue. Vous pouvez continuer vers le globe ou scanner une autre carte." class="faint sheet__note" />
+                <ui:Label text="Carte d'identité reconnue. Aucune image n'est conservée." class="faint sheet__note" />
                 <ui:VisualElement class="sheet__actions">
                     <ui:Button name="retryButton" class="btn">
                         <ui:VisualElement class="icon icon--refresh" />

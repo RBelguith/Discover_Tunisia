@@ -7,7 +7,7 @@ A Unity app that presents three Tunisian governorates: Nabeul, Bizerte and Kairo
 ## Features
 
 - Home, region list, card scan, globe and AR screens
-- A printed region card in front of the webcam selects its governorate
+- An identity card in front of the webcam selects its governorate
 - Monuments turn on a stage, and stand on a printed target once the visitor turns the camera on
 - Texts, photos and 3D models live in assets you edit in the Inspector
 - Interface in French, built with UI Toolkit
@@ -37,7 +37,7 @@ Open `Assets/DiscoverTunisia/Scenes/01_Accueil.unity` and press Play.
 | --- | --- |
 | `01_Accueil` | Shows the globe and opens the region list. |
 | `02_Identification` | Lists the governorates and opens the globe or the scan. |
-| `03_Scan` | Recognizes a region card with the webcam and opens its governorate on the globe. |
+| `03_Scan` | Recognizes an identity card with the webcam and opens its governorate on the globe. |
 | `04_Globe` | Shows the governorate on the globe with its monuments, food and clothes. |
 | `05_AR` | Turns the governorate's monuments on a stage, and places them on the printed target once the camera is on. |
 
@@ -50,13 +50,18 @@ Print these files from `Assets/DiscoverTunisia/AR/` at the sizes below:
 | File | Width | Use |
 | --- | --- | --- |
 | `Targets/CIBLE_AR.png` | 20 cm | Anchors the monuments on the AR screen. |
-| `ScanCards/nabeul.jpg`, `bizerte.jpg`, `kairouan.jpg` | 85.6 mm | Selects a governorate on the scan screen. |
 
-To print at another size, change `targetWidth` on the `ARScreen` in `05_AR`, or `cardWidth` on the `ScanScreen` in `03_Scan`. Both are in meters.
+To print at another size, change `targetWidth` on the `ARScreen` in `05_AR`. It is in meters.
+
+## Identity cards
+
+The scan screen recognizes identity cards from photos that stay out of git, because they hold personal data. Put each photo in `Assets/DiscoverTunisia/Settings/Resources/IdCards/` and name it after the governorate it opens: `nabeul.jpg`, `bizerte.jpg` or `kairouan.jpg`. Unity imports them readable, as Vuforia needs. They are also packed into any build made on that machine.
+
+With no photo in that folder, the scan screen says the scan is unavailable and sends the visitor to the list.
 
 ## Content
 
-Each governorate is a `GovernorateData` asset in `Assets/DiscoverTunisia/Content/Governorates/`, listed in `Content/ContentCatalog.asset`. It holds the texts, the map position, the accent color, the monuments, food and clothes, and the scan card.
+Each governorate is a `GovernorateData` asset in `Assets/DiscoverTunisia/Content/Governorates/`, listed in `Content/ContentCatalog.asset`. It holds the texts, the map position, the accent color, the monuments, food and clothes.
 
 To add a governorate:
 
@@ -84,7 +89,7 @@ The avatar's outfit takes the color of the chosen governorate. Any part of a mod
 
 Open **Window > General > Test Runner**. The EditMode tests check:
 
-- The content: unique ids, texts, positions inside Tunisia, a photo and a model for every entry, readable scan cards
+- The content: unique ids, texts, positions inside Tunisia, a photo and a model for every entry, identity cards named after a governorate and readable
 - That every monument has its own model, and that the monuments, the avatar, the markers and the stand use the models exported by the Blender script
 - That the avatar's outfit takes the governorate's color
 - The globe math that places a latitude and longitude on the sphere
@@ -103,7 +108,7 @@ Folders in `Assets/DiscoverTunisia/`:
 
 | Folder | Contents |
 | --- | --- |
-| `AR` | Contains the printed target and the scan cards. |
+| `AR` | Contains the printed target. |
 | `Art` | Contains the Blender models, the prefabs, the globe meshes, materials, shaders and textures. |
 | `Content` | Contains the catalog, the governorate assets and their photos. |
 | `Scenes` | Contains one scene per screen. |

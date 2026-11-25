@@ -251,7 +251,7 @@ namespace DiscoverTunisia.Screens
 
         private void ShowSettings()
         {
-            string source = AppSession.Source == SelectionSource.Scan ? "scan d'une carte région" : "choix dans la liste";
+            string source = AppSession.Source == SelectionSource.Scan ? "scan de la carte d'identité" : "choix dans la liste";
             ShowModal("Réglages", $"Gouvernorat : {_governorate.DisplayName}\nChoisi par {source}.",
                 ("Changer de gouvernorat", () => Navigator.Go(AppScreen.Identification), true),
                 ("Retour à l'accueil", () => Navigator.Go(AppScreen.Home), false),

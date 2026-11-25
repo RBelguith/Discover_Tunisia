@@ -6,11 +6,14 @@ using UnityEngine.UIElements;
 
 namespace DiscoverTunisia.Screens
 {
-    /// <summary>Recognizes a printed region card with the camera and opens its governorate.</summary>
+    /// <summary>Recognizes an identity card with the camera and opens the governorate it belongs to.</summary>
     public sealed class ScanScreen : ScreenController
     {
+        /// <summary>Resources folder of the card photos. Each file is named after a governorate id, such as nabeul.jpg.</summary>
+        public const string IdCardsFolder = "IdCards";
+
         [SerializeField] private ImageTracker tracker;
-        [SerializeField, Tooltip("Printed width of the photo on a region card, in meters.")]
+        [SerializeField, Tooltip("Width of an identity card (ID-1 format), in meters.")]
         private float cardWidth = 0.0856f;
 
         private Label _status;
@@ -37,9 +40,30 @@ namespace DiscoverTunisia.Screens
             }
             tracker.StateChanged += OnTrackerState;
             tracker.TargetChanged += OnTarget;
-            foreach (var g in catalog.Governorates)
-                if (g.ScanCard != null) tracker.AddTarget(g.Id, g.ScanCard, cardWidth);
+            if (AddCards() == 0)
+            {
+                tracker.StopCamera();
+                ShowFailure("Aucune carte d'identité n'est enregistrée pour le scan.");
+                return;
+            }
             OnTrackerState(tracker.State);
+        }
+
+        private int AddCards()
+        {
+            int added = 0;
+            foreach (var card in Resources.LoadAll<Texture2D>(IdCardsFolder))
+            {
+                var g = catalog.Find(card.name.ToLowerInvariant());
+                if (g == null)
+                {
+                    Debug.LogWarning($"Identity card '{card.name}' matches no governorate id, so the scan ignores it.");
+                    continue;
+                }
+                tracker.AddTarget(g.Id, card, cardWidth);
+                added++;
+            }
+            return added;
         }
 
         private void OnDisable()
@@ -54,7 +78,7 @@ namespace DiscoverTunisia.Screens
             switch (state)
             {
                 case TrackerState.Starting: _status.text = "Démarrage de la caméra..."; break;
-                case TrackerState.Running: HideFailure(); _status.text = "Placez une carte région dans le cadre"; break;
+                case TrackerState.Running: HideFailure(); _status.text = "Placez votre carte d'identité dans le cadre"; break;
                 case TrackerState.Failed: ShowFailure(tracker.FailureMessage); break;
             }
         }
@@ -67,7 +91,8 @@ namespace DiscoverTunisia.Screens
 
             _result.Q<Label>("resultName").text = _found.DisplayName;
             _result.Q<Label>("resultSubtitle").text = _found.Subtitle;
-            _result.Q("resultPhoto").style.backgroundImage = new StyleBackground(_found.ScanCard);
+            var photo = _found.Monuments.Count > 0 ? _found.Monuments[0].Image : null;
+            _result.Q("resultPhoto").style.backgroundImage = photo != null ? new StyleBackground(photo) : StyleKeyword.None;
             _result.Q("resultDot").style.backgroundColor = _found.AccentColor;
             _result.RemoveFromClassList("hidden");
             _reticle.AddToClassList("hidden");

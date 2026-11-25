@@ -90,3 +90,7 @@ crashlytics-build.properties
 
 # Python bytecode from the Blender scripts
 __pycache__/
+
+# Identity cards for the scan screen, kept local because they hold personal data
+/[Aa]ssets/DiscoverTunisia/Settings/Resources/IdCards/
+/[Aa]ssets/DiscoverTunisia/Settings/Resources/IdCards.meta
