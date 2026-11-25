@@ -1,0 +1,45 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="project://database/Assets/DiscoverTunisia/UI/Styles/Theme.uss" />
+    <ui:Style src="AR.uss" />
+    <ui:VisualElement name="screen" class="screen" picking-mode="Ignore">
+        <ui:VisualElement name="stage" class="ar__stage" />
+        <ui:VisualElement class="top-bar" picking-mode="Ignore">
+            <ui:Button name="backButton" class="btn icon-btn">
+                <ui:VisualElement class="icon icon--back" />
+            </ui:Button>
+            <ui:VisualElement class="top-bar__title" picking-mode="Ignore">
+                <ui:Label text="RÉALITÉ AUGMENTÉE" class="eyebrow" />
+                <ui:Label name="governorateName" text="Kairouan" class="screen-title" />
+            </ui:VisualElement>
+            <ui:VisualElement class="top-bar__spacer" picking-mode="Ignore" />
+        </ui:VisualElement>
+        <ui:VisualElement name="info" class="panel ar__info">
+            <ui:VisualElement name="monumentPhoto" class="ar__photo" picking-mode="Ignore" />
+            <ui:VisualElement class="ar__nav">
+                <ui:Button name="prevButton" class="btn icon-btn">
+                    <ui:VisualElement class="icon icon--back" />
+                </ui:Button>
+                <ui:VisualElement class="ar__nav-text" picking-mode="Ignore">
+                    <ui:Label name="monumentName" text="Grande mosquée de Kairouan" class="ar__monument" />
+                    <ui:Label name="monumentCount" text="1 / 3" class="faint" />
+                </ui:VisualElement>
+                <ui:Button name="nextButton" class="btn icon-btn">
+                    <ui:VisualElement class="icon icon--next" />
+                </ui:Button>
+            </ui:VisualElement>
+            <ui:ScrollView name="monumentScroll" class="ar__scroll" mode="Vertical" horizontal-scroller-visibility="Hidden">
+                <ui:Label name="monumentText" text="Description" class="ar__text" />
+            </ui:ScrollView>
+            <ui:Button name="cameraButton" class="btn btn--primary ar__camera-btn">
+                <ui:VisualElement name="cameraIcon" class="icon icon--ar" />
+                <ui:Label name="cameraLabel" text="Voir sur la cible" />
+            </ui:Button>
+        </ui:VisualElement>
+        <ui:VisualElement name="statusPill" class="status-pill" picking-mode="Ignore">
+            <ui:VisualElement class="status-pill__body" picking-mode="Ignore">
+                <ui:VisualElement class="icon icon--ar" />
+                <ui:Label name="statusText" text="Glissez pour faire tourner le monument" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

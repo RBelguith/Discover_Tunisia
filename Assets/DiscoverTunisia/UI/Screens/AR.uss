@@ -1,0 +1,118 @@
+.ar__stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.ar__info {
+    position: absolute;
+    left: 64px;
+    top: 190px;
+    bottom: 64px;
+    width: 640px;
+    padding: 24px;
+    overflow: hidden;
+}
+
+.ar__photo {
+    height: 240px;
+    flex-shrink: 0;
+    border-radius: 24px;
+    background-color: var(--c-panel-soft);
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+.ar__nav {
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    margin-top: 20px;
+}
+
+.ar__nav-text {
+    flex-grow: 1;
+    flex-shrink: 1;
+    align-items: center;
+    margin: 0 12px;
+}
+
+.ar__monument {
+    font-size: 34px;
+    -unity-text-align: middle-center;
+    white-space: normal;
+    -unity-font-definition: url("project://database/Assets/DiscoverTunisia/UI/Fonts/Poppins-SemiBold-SDF.asset");
+}
+
+.ar__scroll {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    min-height: 0;
+    margin-top: 16px;
+}
+
+.ar__text {
+    font-size: 26px;
+    flex-shrink: 0;
+    white-space: normal;
+    color: var(--c-text-2);
+}
+
+.ar__camera-btn {
+    flex-shrink: 0;
+    margin-top: 20px;
+}
+
+.ar--camera .ar__info {
+    top: auto;
+    bottom: 140px;
+    left: 50%;
+    width: 900px;
+    translate: -50% 0;
+}
+
+.ar--camera .ar__photo,
+.ar--camera .ar__scroll {
+    display: none;
+}
+
+.ar--camera .ar__nav {
+    margin-top: 0;
+}
+
+.ar--camera .ar__stage {
+    display: none;
+}
+
+.status-pill {
+    bottom: 48px;
+}
+
+.ar--preview .status-pill {
+    left: 704px;
+}
+
+.ar__scroll .unity-scroll-view__content-and-vertical-scroll-container {
+    flex-direction: row;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.ar__scroll .unity-scroll-view__content-viewport {
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: hidden;
+}
+
+.ar__scroll .unity-scroll-view__content-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.ar__scroll .unity-scroller {
+    display: none;
+}

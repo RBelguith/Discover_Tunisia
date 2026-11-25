@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0db6e89443ce5488db00a227fd4cc61f, type: 3}
+  m_Name: Nabeul
+  m_EditorClassIdentifier: DiscoverTunisia::DiscoverTunisia.Content.GovernorateData
+  id: nabeul
+  displayName: Nabeul
+  subtitle: "Cap Bon, c\xF4te est"
+  description: "Chef-lieu du gouvernorat de Nabeul, la ville se trouve au sud de la p\xE9ninsule du cap Bon, \xE0 une soixantaine de kilom\xE8tres au sud-est de Tunis. Entour\xE9e de vergers et de jardins, elle est r\xE9put\xE9e pour sa poterie et ses fa\xEFences, ses souks s\xE9culaires et ses plages du golfe d'Hammamet."
+  shortBlurb: 'Nabeul, capitale du cap Bon : poterie, souks et agrumes face au golfe d''Hammamet.'
+  latitude: 36.45
+  longitude: 10.73
+  accentColor: {r: 1, g: 0.55, b: 0.2, a: 1}
+  monuments:
+  - title: "Site romain de N\xE9apolis"
+    description: "Fond\xE9e il y a plus de 2 400 ans, N\xE9apolis (\xAB nouvelle cit\xE9 \xBB) est l'une des villes les plus anciennes d'Afrique du Nord mentionn\xE9es par les textes apr\xE8s Carthage. Le site arch\xE9ologique, \xE0 deux kilom\xE8tres du centre, d\xE9voile notamment la Maison des Nymphes et de riches mosa\xEFques romaines."
+    image: {fileID: 21300000, guid: 8cf1155caf9af884a822291bdd4f6df1, type: 3}
+    model: {fileID: 5714395799186228796, guid: 996de8ac759a147aa8a5fb47aa4efe08, type: 3}
+  - title: "M\xE9dina et souks de Nabeul"
+    description: "C\u0153ur historique de la ville, la m\xE9dina s'ouvre par Bab Bled et abrite des souks s\xE9culaires : Souk El Balgha (l'un des plus anciens), Souk El Haddada des forgerons et Souk Ezzit de l'huile, autour de la Grande Mosqu\xE9e \xE9rig\xE9e au IXe si\xE8cle."
+    image: {fileID: 21300000, guid: 96ce439525586f3459df4d0cb280b999, type: 3}
+    model: {fileID: 7077203866201494288, guid: 312bc223420cb4957911137def50069d, type: 3}
+  foods:
+  - title: "Poup\xE9es de sucre du cap Bon"
+    description: "Nabeul est le seul lieu de Tunisie o\xF9 l'on fabrique des figurines en sucre moul\xE9 et peint aux colorants naturels : mari\xE9es, gazelles ou poissons pour les filles, coqs, chevaux ou lions pour les gar\xE7ons. Offertes au Nouvel an islamique, elles sont cass\xE9es dix jours apr\xE8s pour c\xE9l\xE9brer Achoura. La ville est aussi r\xE9put\xE9e pour sa harissa et ses agrumes."
+    image: {fileID: 21300000, guid: b05c89dc238fb4f4f88d923ac3baeb38, type: 3}
+  clothes:
+  - title: "Caftan brod\xE9 et parures du cap Bon"
+    description: "Les ateliers de la m\xE9dina perp\xE9tuent le caftan de soie orn\xE9 de fil d'or et la ch\xE9chia, coiffure de feutre rouge embl\xE9matique de la Tunisie. La mari\xE9e du cap Bon porte le khit er rouh (\xAB fil de l'\xE2me \xBB), longue cha\xEEne d'argent offerte par la famille du mari\xE9, avec des boucles d'oreilles et des bracelets cisel\xE9s."
+    image: {fileID: 21300000, guid: adb9c8dd0d7765143a8d5da36b8efc4e, type: 3}

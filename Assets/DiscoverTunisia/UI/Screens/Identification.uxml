@@ -1,0 +1,36 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="project://database/Assets/DiscoverTunisia/UI/Styles/Theme.uss" />
+    <ui:Style src="Identification.uss" />
+    <ui:VisualElement name="screen" class="screen" picking-mode="Ignore">
+        <ui:VisualElement class="top-bar" picking-mode="Ignore">
+            <ui:Button name="backButton" class="btn icon-btn">
+                <ui:VisualElement class="icon icon--back" />
+            </ui:Button>
+            <ui:VisualElement class="top-bar__title" picking-mode="Ignore">
+                <ui:Label text="ÉTAPE 1 SUR 2" class="eyebrow" />
+                <ui:Label text="Choisissez votre région" class="screen-title" />
+            </ui:VisualElement>
+            <ui:VisualElement class="top-bar__spacer" picking-mode="Ignore" />
+        </ui:VisualElement>
+        <ui:VisualElement class="ident__body" picking-mode="Ignore">
+            <ui:VisualElement class="panel ident__card ident__card--scan">
+                <ui:VisualElement class="ident__badge">
+                    <ui:VisualElement class="icon icon--card" />
+                </ui:VisualElement>
+                <ui:Label text="Scanner ma carte d'identité" class="ident__card-title" />
+                <ui:Label text="Présentez votre carte d'identité devant la caméra. L'application la reconnaît et ouvre votre gouvernorat. Aucune image n'est conservée." class="ident__card-text" />
+                <ui:VisualElement class="spacer" picking-mode="Ignore" />
+                <ui:Button name="scanButton" class="btn btn--primary">
+                    <ui:VisualElement class="icon icon--scan" />
+                    <ui:Label text="Lancer le scan" />
+                </ui:Button>
+                <ui:Label name="scanUnavailable" text="Le scan a besoin de Vuforia Engine, qui n'est pas installé dans ce projet." class="faint ident__note" />
+            </ui:VisualElement>
+            <ui:VisualElement class="panel ident__card">
+                <ui:Label text="Choisir dans la liste" class="ident__card-title" />
+                <ui:Label text="Aucune donnée personnelle n'est collectée." class="faint" />
+                <ui:VisualElement name="governorateList" class="ident__list" picking-mode="Ignore" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,49 @@
+.home__content {
+    position: absolute;
+    left: 140px;
+    top: 0;
+    bottom: 0;
+    width: 62%;
+    justify-content: center;
+}
+
+.home__title-row {
+    flex-direction: row;
+    margin-top: 12px;
+}
+
+.home__title {
+    font-size: 112px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    -unity-font-definition: url("project://database/Assets/DiscoverTunisia/UI/Fonts/Poppins-Bold-SDF.asset");
+}
+
+.home__title--accent {
+    color: var(--c-accent);
+    margin-left: 32px;
+}
+
+.home__lead {
+    max-width: 900px;
+    margin-top: 8px;
+    font-size: 32px;
+    white-space: normal;
+    color: var(--c-text-2);
+}
+
+.home__chips {
+    flex-direction: row;
+    margin-top: 44px;
+}
+
+.home__start {
+    align-self: flex-start;
+    margin-top: 64px;
+}
+
+.home__footer {
+    position: absolute;
+    left: 140px;
+    bottom: 52px;
+}
