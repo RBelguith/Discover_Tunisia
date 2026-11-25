@@ -357,7 +357,7 @@ MonoBehaviour:
   avatar: {fileID: 359919742}
   stand: {fileID: 1939063302}
   standSpot: {fileID: 396546742}
-  standFootprint: 2.2
+  standFootprint: 2.75
   standSpinDegreesPerSecond: 22
 --- !u!114 &500705645
 MonoBehaviour:
@@ -646,6 +646,14 @@ PrefabInstance:
     - target: {fileID: 1838103892536524953, guid: d2098657d24c445bd9c5d48fc997c085, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178529624432458922, guid: d2098657d24c445bd9c5d48fc997c085, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.775
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178529624432458922, guid: d2098657d24c445bd9c5d48fc997c085, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.775
       objectReference: {fileID: 0}
     - target: {fileID: 5129614773691016561, guid: d2098657d24c445bd9c5d48fc997c085, type: 3}
       propertyPath: m_LocalPosition.x

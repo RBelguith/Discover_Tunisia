@@ -504,7 +504,7 @@ MonoBehaviour:
   footprintOnTarget: 0.85
   previewRig: {fileID: 1881799696}
   previewSpot: {fileID: 1451290246}
-  previewFootprint: 2.4
+  previewFootprint: 4.455
   spinDegreesPerSecond: 22
   dragDegreesPerPixel: 0.35
   spinResumeDelay: 1.5
@@ -557,6 +557,14 @@ PrefabInstance:
     - target: {fileID: 1838103892536524953, guid: d2098657d24c445bd9c5d48fc997c085, type: 3}
       propertyPath: m_Name
       value: Plinth
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178529624432458922, guid: d2098657d24c445bd9c5d48fc997c085, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.635875
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178529624432458922, guid: d2098657d24c445bd9c5d48fc997c085, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.635875
       objectReference: {fileID: 0}
     - target: {fileID: 5129614773691016561, guid: d2098657d24c445bd9c5d48fc997c085, type: 3}
       propertyPath: m_LocalPosition.x
